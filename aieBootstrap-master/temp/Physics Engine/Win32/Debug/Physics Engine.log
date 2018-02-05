@@ -1,0 +1,10 @@
+﻿  Sphere.cpp
+  Rigidbody.cpp
+  main.cpp
+  Physics_EngineApp.cpp
+  PhysicsScene.cpp
+c:\users\s170841\documents\physics for games not git\aiebootstrap-master\physics engine\physicsscene.cpp(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Physics Engine.vcxproj -> C:\Users\s170841\Documents\Physics for Games not git\aieBootstrap-master\temp\Physics Engine\Win32\Debug\Physics Engine.exe
+  Physics Engine.vcxproj -> C:\Users\s170841\Documents\Physics for Games not git\aieBootstrap-master\temp\Physics Engine\Win32\Debug\Physics Engine.pdb (Full PDB)
