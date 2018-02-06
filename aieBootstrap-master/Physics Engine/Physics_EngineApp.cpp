@@ -26,11 +26,14 @@ bool Physics_EngineApp::startup() {
 
 	//m_plane = new Plane();
 
-	Sphere* ball1 = new Sphere(glm::vec2(-4, 0), glm::vec2(0, 0), 4.0f, 4, glm::vec4(1, 0, 0, 1), true);
-	Sphere* ball2 = new Sphere(glm::vec2(4, 0), glm::vec2(0, 0), 4.0f, 4, glm::vec4(0, 1, 0, 1), true);
-	m_physicsScene->addActor(ball1);
-	m_physicsScene->addActor(ball2);
-	ball1->applyForceToActor(ball2, glm::vec2(2, 0));
+	//Sphere* ball1 = new Sphere(glm::vec2(-4, 0), glm::vec2(0, 0), 4.0f, 4, glm::vec4(1, 0, 0, 1), true);
+	//Sphere* ball2 = new Sphere(glm::vec2(4, 0), glm::vec2(0, 0), 4.0f, 4, glm::vec4(0, 1, 0, 1), true);
+	//m_physicsScene->addActor(ball1);
+	//m_physicsScene->addActor(ball2);
+	//ball1->applyForceToActor(ball2, glm::vec2(2, 0));
+
+	m_rocket = new Rocket(glm::vec2(0, 0), glm::vec2(0, 0), 10.0f, 4, glm::vec4(1, 1, 0, 1), m_physicsScene);
+	m_physicsScene->addActor(m_rocket);
 
 	return true;
 }
