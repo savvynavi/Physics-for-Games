@@ -1,6 +1,10 @@
 #pragma once
 #include<glm\ext.hpp>
 
+class Sphere;
+class Plane;
+//class Box;
+
 enum ShapeType{
 	PLANE = 0,
 	SPHERE,
@@ -15,6 +19,11 @@ public:
 	virtual void debug() = 0;
 	virtual void makeGizmo() = 0;
 	virtual void resetPosition(){};
+
+	virtual void collision(PhysicsObject* other) = 0;
+	virtual bool sphereCollision(Sphere* other) = 0;
+	virtual bool planeCollision(Plane* other) = 0;
+	//virtual bool collision(Box* other) = 0;
 protected:
 	ShapeType m_shapeID;
 };

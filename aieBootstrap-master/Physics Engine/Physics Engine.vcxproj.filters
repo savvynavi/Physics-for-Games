@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Physics Objects">
+      <UniqueIdentifier>{ad0f1ea8-f8bb-4a5a-b5a1-43a19aa3bf01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physics Objects">
+      <UniqueIdentifier>{72f92a16-a7a0-4ee9-b053-124def5033e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Physics_EngineApp.cpp">
@@ -25,10 +31,16 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Rigidbody.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Physics Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Rocket.cpp">
+      <Filter>Source Files\Physics Objects</Filter>
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Physics Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>Source Files\Physics Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -38,14 +50,20 @@
     <ClInclude Include="PhysicsScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Rigidbody.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Physics Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Rocket.h">
+      <Filter>Header Files\Physics Objects</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Physics Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsObject.h">
+      <Filter>Header Files\Physics Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Header Files\Physics Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

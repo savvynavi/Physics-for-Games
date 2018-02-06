@@ -2,7 +2,7 @@
 
 #include "PhysicsScene.h"
 #include"PhysicsObject.h"
-#include"Rigidbody.h""
+#include"Rigidbody.h"
 
 PhysicsScene::PhysicsScene(){
 	m_timeStep = 0.01f;
@@ -38,7 +38,7 @@ void PhysicsScene::update(float dt){
 		accumulatedTime -= m_timeStep;
 	}
 
-	//check for colisions
+	//check for colisions (turn off for rocket part)
 	for(auto pActor : m_actors){
 		for(auto pOther : m_actors){
 			if(pActor == pOther){

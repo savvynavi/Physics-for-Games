@@ -3,7 +3,7 @@
 
 class Sphere : public Rigidbody{
 public:
-	Sphere(glm::vec2 position, glm::vec2 velocity, float mass, float radius, glm::vec4 colour);
+	Sphere(glm::vec2 position, glm::vec2 velocity, float mass, float radius, glm::vec4 colour, bool collisionOn);
 	~Sphere();
 
 	virtual void makeGizmo();
@@ -11,8 +11,14 @@ public:
 
 	float getRadius() { return m_radius; }
 	glm::vec4 getColour() { return m_colour; }
+
+	virtual void collision(PhysicsObject* other);
+	virtual bool sphereCollision(Sphere* other);
+	virtual bool planeCollision(Plane* other);
+
 protected:
 	float m_radius;
 	glm::vec4 m_colour;
+	bool m_collisionOn;
 };
 
