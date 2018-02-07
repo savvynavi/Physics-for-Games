@@ -15,7 +15,7 @@ public:
 	glm::vec2 getNormal(){ return m_normal; }
 	float getDistance() { return m_distanceToOrigin; }
 
-	virtual void collision(PhysicsObject* other);
+	virtual bool collision(PhysicsObject* other);
 	virtual bool sphereCollision(Sphere* other);
 	virtual bool planeCollision(Plane* other) { return false; };
 	//virtual bool collision(Box* other);

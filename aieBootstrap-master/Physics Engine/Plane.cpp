@@ -1,5 +1,6 @@
 #include<Gizmos.h>
 #include "Plane.h"
+#include"Sphere.h"
 
 
 
@@ -36,10 +37,10 @@ void Plane::resetPosition(){
 	m_distanceToOrigin = 0;
 }
 
-void Plane::collision(PhysicsObject* other){
-	other->planeCollision(this);
+bool Plane::collision(PhysicsObject* other){
+	return other->planeCollision(this);
 }
 
 bool Plane::sphereCollision(Sphere* other){
-	return false;
+	return other->planeCollision(this);
 }

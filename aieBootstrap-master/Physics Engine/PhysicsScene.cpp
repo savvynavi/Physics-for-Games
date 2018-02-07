@@ -49,7 +49,7 @@ void PhysicsScene::update(float dt){
 			}
 
 			Rigidbody* pRigidbody = dynamic_cast<Rigidbody*>(pActor);
-			if(pRigidbody->checkCollision(pOther) == true){
+			if(pRigidbody != nullptr && pRigidbody->checkCollision(pOther) == true){
 				pRigidbody->applyForceToActor(dynamic_cast<Rigidbody*>(pOther), pRigidbody->getVelocity() * pRigidbody->getMass());
 				dirty.push_back(pRigidbody);
 				dirty.push_back(pOther);

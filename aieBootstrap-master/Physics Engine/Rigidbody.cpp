@@ -11,8 +11,8 @@ Rigidbody::~Rigidbody(){
 }
 
 void Rigidbody::fixedUpdate(glm::vec2 gravity, float timeStep){
-	applyForce(gravity * m_mass * timeStep);
 	m_position += m_velocity * timeStep;
+	applyForce(gravity * m_mass * timeStep);
 }
 
 void Rigidbody::debug(){
@@ -27,6 +27,9 @@ void Rigidbody::applyForce(glm::vec2 force){
 
 //newtons 3rd law
 void Rigidbody::applyForceToActor(Rigidbody* actor2, glm::vec2 force){
-	actor2->applyForce(force);
-	this->applyForce(-force);
+	if(actor2 != nullptr){
+		actor2->applyForce(force);
+		this->applyForce(-force);
+	}
+
 }

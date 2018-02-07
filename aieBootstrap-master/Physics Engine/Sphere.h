@@ -12,7 +12,7 @@ public:
 	float getRadius() { return m_radius; }
 	glm::vec4 getColour() { return m_colour; }
 
-	virtual void collision(PhysicsObject* other);
+	virtual bool collision(PhysicsObject* other);
 	virtual bool sphereCollision(Sphere* other);
 	virtual bool planeCollision(Plane* other);
 
