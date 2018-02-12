@@ -19,12 +19,20 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw();
 
+	void cradleSetUp();
+
 protected:
 
 	aie::Renderer2D*	m_2dRenderer;
 	aie::Font*			m_font;
 	PhysicsScene*		m_physicsScene;
-	Sphere*				ball1;
+	Sphere*				m_ball1;
+	Sphere*				m_ball2;
+	Sphere*				m_ball3;
+	Sphere*				m_ball4;
+	Sphere*				m_ball5;
+
 	Rocket*				m_rocket;
-	Plane*				m_plane;
+	Plane*				m_plane1;
+	Plane*				m_plane2;
 };

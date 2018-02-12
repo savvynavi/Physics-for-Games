@@ -37,10 +37,13 @@ void Plane::resetPosition(){
 	m_distanceToOrigin = 0;
 }
 
-bool Plane::collision(PhysicsObject* other){
-	return other->planeCollision(this);
-}
+void Plane::resolveCollision(Rigidbody* actor2){
+	glm::vec2 normal = this->getNormal();
+	glm::vec2 relativeVelocity = actor2->getVelocity();
 
-bool Plane::sphereCollision(Sphere* other){
-	return other->planeCollision(this);
+	float elasticity = 1;
+	float j = glm::dot(-(1 + elasticity) * (relativeVelocity), normal) / (1 / actor2->getMass());
+
+	glm::vec2 force = normal * j;
+	actor2->applyForce(force);
 }

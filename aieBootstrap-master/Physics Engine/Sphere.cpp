@@ -16,14 +16,6 @@ void Sphere::makeGizmo(){
 }
 
 bool Sphere::checkCollision(PhysicsObject* other){
-	return other->collision(this);
-}
-
-bool Sphere::collision(PhysicsObject* other){
-	return other->sphereCollision(this);
-}
-
-bool Sphere::sphereCollision(Sphere* other){
 	if(m_collisionOn == false){
 		return false;
 	}
@@ -42,30 +34,3 @@ bool Sphere::sphereCollision(Sphere* other){
 		return false;
 	}
 }
-
-bool Sphere::planeCollision(Plane* other){
-	Plane* plane = dynamic_cast<Plane*>(other);
-	if(other != nullptr){
-		glm::vec2 collisionNormal = plane->getNormal();
-		float sphereToPlane = glm::dot(this->getPosition(), plane->getNormal() - plane->getDistance());
-
-		//if we are behind the plane then we flip the normal
-		if(sphereToPlane < 0){
-			collisionNormal *= -1;
-			sphereToPlane *= -1;
-		}
-
-		float intersection = this->getRadius() - sphereToPlane;
-		if(intersection > 0){
-			//set sphere velocity to zero so it stops
-			this->m_velocity = glm::vec2(0, 0);
-			return true;
-		}
-	}
-	return false;
-}
-
-//do when box class done
-//bool Sphere::collision(Box* other){
-//
-//}

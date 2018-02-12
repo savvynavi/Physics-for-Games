@@ -20,19 +20,7 @@ bool Physics_EngineApp::startup() {
 	m_2dRenderer = new aie::Renderer2D();
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
 
-	m_physicsScene = new PhysicsScene();
-	m_physicsScene->setGravity(glm::vec2(0, -10));
-	m_physicsScene->setTimestep(0.01f);
-
-	//m_plane = new Plane();
-
-	Sphere* ball1 = new Sphere(glm::vec2(-7, 20), glm::vec2(0, 0), 4.0f, 4, glm::vec4(1, 0, 0, 1), true);
-	m_plane = new Plane(glm::vec2(0, 1), -10);
-	//Sphere* ball2 = new Sphere(glm::vec2(10, 0), glm::vec2(-5, 0), 4.0f, 4, glm::vec4(0, 1, 0, 1), true);
-	m_physicsScene->addActor(ball1);
-	m_physicsScene->addActor(m_plane);
-	//m_physicsScene->addActor(ball2);
-	//ball1->applyForceToActor(ball2, glm::vec2(2, 0));
+	cradleSetUp();
 
 	return true;
 }
@@ -76,4 +64,30 @@ void Physics_EngineApp::draw() {
 
 	// done drawing sprites
 	m_2dRenderer->end();
+}
+
+//sets up a newtons cradle
+void Physics_EngineApp::cradleSetUp(){
+	m_physicsScene = new PhysicsScene();
+	m_physicsScene->setGravity(glm::vec2(0, 0));
+	m_physicsScene->setTimestep(0.01f);
+
+	m_plane1 = new Plane(glm::vec2(-1, 0), 5);
+	m_plane2 = new Plane(glm::vec2(1, 0), 50);
+
+	m_ball1 = new Sphere(glm::vec2(0, 15), glm::vec2(10, 0), 4.0f, 4, glm::vec4(1, 1, 0, 1), true);
+	m_ball2 = new Sphere(glm::vec2(10, 15), glm::vec2(0, 0), 4.0f, 4, glm::vec4(0, 1, 0, 1), true);
+	m_ball3 = new Sphere(glm::vec2(20, 15), glm::vec2(0, 0), 4.0f, 4, glm::vec4(1, 1, 0, 1), true);
+	m_ball4 = new Sphere(glm::vec2(30, 15), glm::vec2(0, 0), 4.0f, 4, glm::vec4(0, 1, 0, 1), true);
+	m_ball5 = new Sphere(glm::vec2(40, 15), glm::vec2(0, 0), 4.0f, 4, glm::vec4(1, 1, 0, 1), true);
+
+	m_physicsScene->addActor(m_ball1);
+	m_physicsScene->addActor(m_ball2);
+	m_physicsScene->addActor(m_ball3);
+	m_physicsScene->addActor(m_ball4);
+	m_physicsScene->addActor(m_ball5);
+	
+	m_physicsScene->addActor(m_plane1);
+	m_physicsScene->addActor(m_plane2);
+
 }

@@ -20,9 +20,17 @@ public:
 
 	void setTimestep(const float timeStep) { m_timeStep = timeStep; }
 	float getTimeStep() const { return m_timeStep; }
+
+	void checkForCollision();
+
+	static bool plane2Plane(PhysicsObject* obj1, PhysicsObject* obj2);
+	static bool plane2Sphere(PhysicsObject* obj1, PhysicsObject* obj2);
+	static bool sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2);
+	static bool sphere2Sphere(PhysicsObject* obj1, PhysicsObject* onj2);
 protected:
 	glm::vec2 m_gravity;
 	float m_timeStep;
 	std::list<PhysicsObject*> m_actors;
+	const int SHAPE_COUNT = 2;
 };
 
