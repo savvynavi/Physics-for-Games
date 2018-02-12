@@ -20,6 +20,7 @@ public:
 	virtual void draw();
 
 	void cradleSetUp();
+	void frictionExampleSetup();
 
 protected:
 
@@ -35,4 +36,5 @@ protected:
 	Rocket*				m_rocket;
 	Plane*				m_plane1;
 	Plane*				m_plane2;
+	Plane*				m_plane3;
 };

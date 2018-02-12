@@ -20,7 +20,7 @@ bool Physics_EngineApp::startup() {
 	m_2dRenderer = new aie::Renderer2D();
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
 
-	cradleSetUp();
+	frictionExampleSetup();
 
 	return true;
 }
@@ -75,11 +75,11 @@ void Physics_EngineApp::cradleSetUp(){
 	m_plane1 = new Plane(glm::vec2(-1, 0), 5);
 	m_plane2 = new Plane(glm::vec2(1, 0), 50);
 
-	m_ball1 = new Sphere(glm::vec2(0, 15), glm::vec2(10, 0), 4.0f, 4, glm::vec4(1, 1, 0, 1), true);
-	m_ball2 = new Sphere(glm::vec2(10, 15), glm::vec2(0, 0), 4.0f, 4, glm::vec4(0, 1, 0, 1), true);
-	m_ball3 = new Sphere(glm::vec2(20, 15), glm::vec2(0, 0), 4.0f, 4, glm::vec4(1, 1, 0, 1), true);
-	m_ball4 = new Sphere(glm::vec2(30, 15), glm::vec2(0, 0), 4.0f, 4, glm::vec4(0, 1, 0, 1), true);
-	m_ball5 = new Sphere(glm::vec2(40, 15), glm::vec2(0, 0), 4.0f, 4, glm::vec4(1, 1, 0, 1), true);
+	m_ball1 = new Sphere(glm::vec2(0, 15), glm::vec2(10, 0), 4.0f, 4, glm::vec4(1, 1, 0, 1), true, 0, 0);
+	m_ball2 = new Sphere(glm::vec2(10, 15), glm::vec2(0, 0), 4.0f, 4, glm::vec4(0, 1, 0, 1), true, 0, 0);
+	m_ball3 = new Sphere(glm::vec2(20, 15), glm::vec2(0, 0), 4.0f, 4, glm::vec4(1, 1, 0, 1), true, 0, 0);
+	m_ball4 = new Sphere(glm::vec2(30, 15), glm::vec2(0, 0), 4.0f, 4, glm::vec4(0, 1, 0, 1), true, 0, 0);
+	m_ball5 = new Sphere(glm::vec2(40, 15), glm::vec2(0, 0), 4.0f, 4, glm::vec4(1, 1, 0, 1), true, 0, 0);
 
 	m_physicsScene->addActor(m_ball1);
 	m_physicsScene->addActor(m_ball2);
@@ -90,4 +90,27 @@ void Physics_EngineApp::cradleSetUp(){
 	m_physicsScene->addActor(m_plane1);
 	m_physicsScene->addActor(m_plane2);
 
+}
+
+//test for friction (change lin/ang drag from 0 to get drag effects)
+void Physics_EngineApp::frictionExampleSetup(){
+	m_physicsScene = new PhysicsScene();
+	m_physicsScene->setGravity(glm::vec2(0, 0));
+	m_physicsScene->setTimestep(0.01f);
+
+	m_plane1 = new Plane(glm::vec2(-0.5f, -0.5f), 5);
+	m_plane2 = new Plane(glm::vec2(1, 0), 50);
+	m_plane3 = new Plane(glm::vec2(0, 1), 30);
+
+	m_ball1 = new Sphere(glm::vec2(0, 15), glm::vec2(10, 0), 4.0f, 4, glm::vec4(0.75f, 0, 1, 1), true, 0, 0);
+	m_ball2 = new Sphere(glm::vec2(10, 15), glm::vec2(-5, 10), 4.0f, 4, glm::vec4(1, 0.5f, 0, 1), true, 0, 0);
+	m_ball3 = new Sphere(glm::vec2(20, 15), glm::vec2(-20, 50), 4.0f, 4, glm::vec4(1, 1, 0, 1), true, 0, 0);
+
+	m_physicsScene->addActor(m_ball1);
+	m_physicsScene->addActor(m_ball2);
+	m_physicsScene->addActor(m_ball3);
+
+	m_physicsScene->addActor(m_plane1);
+	m_physicsScene->addActor(m_plane2);
+	m_physicsScene->addActor(m_plane3);
 }

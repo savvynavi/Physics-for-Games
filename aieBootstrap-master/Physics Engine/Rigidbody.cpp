@@ -1,8 +1,8 @@
 #include "Rigidbody.h"
 
 
-Rigidbody::Rigidbody(ShapeType shapeID, glm::vec2 position, glm::vec2 velocity, float rotation, float mass) : 
-	PhysicsObject(shapeID), m_position(position), m_velocity(velocity), m_rotation(rotation), m_mass(mass){
+Rigidbody::Rigidbody(ShapeType shapeID, glm::vec2 position, glm::vec2 velocity, float rotation, float mass, float linDrag, float angDrag) : 
+	PhysicsObject(shapeID), m_position(position), m_velocity(velocity), m_rotation(rotation), m_mass(mass), m_linearDrag(linDrag), m_angularDrag(angDrag){
 
 }
 
@@ -11,6 +11,9 @@ Rigidbody::~Rigidbody(){
 }
 
 void Rigidbody::fixedUpdate(glm::vec2 gravity, float timeStep){
+	m_velocity -= m_velocity * m_linearDrag * timeStep;
+	m_angularVelocity -= m_angularVelocity * m_angularDrag * timeStep;
+
 	m_position += m_velocity * timeStep;
 	applyForce(gravity * m_mass * timeStep);
 }

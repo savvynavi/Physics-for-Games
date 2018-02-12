@@ -2,8 +2,8 @@
 #include"Plane.h"
 #include<Gizmos.h>
 
-Sphere::Sphere(glm::vec2 position, glm::vec2 velocity, float mass, float radius, glm::vec4 colour, bool collisionOn) : 
-	Rigidbody(SPHERE, position, velocity, 0, mass), m_radius(radius), m_colour(colour), m_collisionOn(collisionOn){
+Sphere::Sphere(glm::vec2 position, glm::vec2 velocity, float mass, float radius, glm::vec4 colour, bool collisionOn, float linDrag = 0.3f, float angDrag = 0.3f) :
+	Rigidbody(SPHERE, position, velocity, 0, mass, linDrag, angDrag), m_radius(radius), m_colour(colour), m_collisionOn(collisionOn){
 
 }
 
