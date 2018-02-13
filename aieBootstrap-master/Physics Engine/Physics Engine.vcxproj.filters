@@ -33,13 +33,13 @@
     <ClCompile Include="Rigidbody.cpp">
       <Filter>Source Files\Physics Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Rocket.cpp">
-      <Filter>Source Files\Physics Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Sphere.cpp">
       <Filter>Source Files\Physics Objects</Filter>
     </ClCompile>
     <ClCompile Include="Plane.cpp">
+      <Filter>Source Files\Physics Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
       <Filter>Source Files\Physics Objects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,9 +53,6 @@
     <ClInclude Include="Rigidbody.h">
       <Filter>Header Files\Physics Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Rocket.h">
-      <Filter>Header Files\Physics Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Sphere.h">
       <Filter>Header Files\Physics Objects</Filter>
     </ClInclude>
@@ -63,6 +60,9 @@
       <Filter>Header Files\Physics Objects</Filter>
     </ClInclude>
     <ClInclude Include="Plane.h">
+      <Filter>Header Files\Physics Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
       <Filter>Header Files\Physics Objects</Filter>
     </ClInclude>
   </ItemGroup>

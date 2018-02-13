@@ -5,6 +5,7 @@
 #include"Rigidbody.h"
 #include"Sphere.h"
 #include"Plane.h"
+#include"Box.h"
 
 PhysicsScene::PhysicsScene(){
 	m_timeStep = 0.01f;
@@ -61,8 +62,9 @@ void PhysicsScene::debugScene(){
 typedef bool(*fn)(PhysicsObject*, PhysicsObject*);
 
 static fn collisionFunctionArray[] = {
-	PhysicsScene::plane2Plane, PhysicsScene::plane2Sphere,
-	PhysicsScene::sphere2Plane, PhysicsScene::sphere2Sphere
+	PhysicsScene::plane2Plane, PhysicsScene::plane2Sphere, PhysicsScene::plane2Box,
+	PhysicsScene::sphere2Plane, PhysicsScene::sphere2Sphere, PhysicsScene::sphere2Box,
+	PhysicsScene::box2Plane, PhysicsScene::box2Sphere, PhysicsScene::box2Box
 };
 
 void PhysicsScene::checkForCollision(){
@@ -100,6 +102,10 @@ bool PhysicsScene::plane2Sphere(PhysicsObject* obj1, PhysicsObject* obj2){
 	return sphere2Plane(obj2, obj1);
 }
 
+bool PhysicsScene::plane2Box(PhysicsObject* obj1, PhysicsObject* obj2){
+	return box2Plane(obj2, obj1);
+}
+
 bool PhysicsScene::sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2){
 	Sphere* sphere = dynamic_cast<Sphere*>(obj1);
 	Plane* plane = dynamic_cast<Plane*>(obj2);
@@ -115,7 +121,8 @@ bool PhysicsScene::sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2){
 		}
 		float intersection = sphere->getRadius() - sphereToPlane;
 		if(intersection > 0){
-			plane->resolveCollision(sphere);
+			glm::vec2 contact = sphere->getPosition() + (collisionNorm * (-sphere->getRadius()));
+			plane->resolveCollision(sphere, contact);
 			return true;
 		}
 	}
@@ -130,9 +137,73 @@ bool PhysicsScene::sphere2Sphere(PhysicsObject* obj1, PhysicsObject* obj2){
 	if(sphere1 != nullptr && sphere2 != nullptr){
 		float distance = glm::distance(sphere1->getPosition(), sphere2->getPosition());
 		if(distance <= (sphere1->getRadius() + sphere2->getRadius())){
-			sphere1->resolveCollision(sphere2);
+			glm::vec2 contact = 0.5f * (sphere1->getPosition() + sphere2->getPosition());
+			sphere1->resolveCollision(sphere2, contact);
 			return true;
 		}
 	}
+	return false;
+}
+
+bool PhysicsScene::sphere2Box(PhysicsObject* obj1, PhysicsObject* obj2){
+	return box2Sphere(obj2, obj1);
+}
+
+bool PhysicsScene::box2Plane(PhysicsObject* obj1, PhysicsObject* obj2){
+	Box* box = dynamic_cast<Box*>(obj1);
+	Plane* plane = dynamic_cast<Plane*>(obj2);
+
+	if(box != nullptr && plane != nullptr){
+		int numContacts = 0;
+		glm::vec2 contact(0, 0);
+		float contactV = 0;
+		float radius = 0.5 * std::fminf(box->getWidth(), box->getHeight());
+
+		//checks which side the centre of mass is on
+		glm::vec2 planeOrigin = plane->getNormal() * plane->getDistance();
+		float comFromPlane = glm::dot(box->getPosition() - planeOrigin, plane->getNormal());
+
+		//checks all 4 corners to see if we've hit a plane
+		for(float x = -box->getExtents().x; x < box->getWidth(); x += box->getWidth()){
+			for(float y = -box->getExtents().y; y < box->getHeight(); y += box->getHeight()){
+				//get pos of the corner in world space
+				glm::vec2 p = box->getPosition() + x * box->getLocalX() + y * box->getLocalY();
+
+				float distFromPlane = glm::dot(p - planeOrigin, plane->getNormal());
+
+				//total velocity of the point
+				float velocityIntoPlane = glm::dot(box->getVelocity() + box->getAngularDrag() * (-y * box->getLocalX() + x* box->getLocalY()), plane->getNormal());
+
+				//if this corner on opp side of COM and continuting that way, need to resolve collision
+				if( (distFromPlane > 0 && comFromPlane < 0 && velocityIntoPlane > 0) || (distFromPlane < 0 && comFromPlane > 0 && velocityIntoPlane < 0)){
+					numContacts++;
+					contact += p;
+					contactV += velocityIntoPlane;
+				}
+			}
+		}
+
+		//if there's been a hit, get average collision velocity into plane, get acc needed to stop/reverse, and average pos at which to apply force
+		if(numContacts > 0){
+			float collisionV = contactV / (float)numContacts;
+			glm::vec2 acceleration = -plane->getNormal() * ((1.0f + box->getElasticity()) * collisionV);
+			glm::vec2 localContact = (contact / (float)numContacts) - box->getPosition();
+
+			float r = glm::dot(localContact, glm::vec2(plane->getNormal().y, -plane->getNormal().x));
+			float mass0 = 1.0f / (1.0f / box->getMass() + (r * r) / box->getMoment());
+
+			//apply force
+			box->applyForce(acceleration * mass0, localContact);
+			//return true;
+		}
+	}
+	return false;
+}
+
+bool PhysicsScene::box2Sphere(PhysicsObject* obj1, PhysicsObject* obj2){
+	return false;
+}
+
+bool PhysicsScene::box2Box(PhysicsObject* obj1, PhysicsObject* obj2){
 	return false;
 }

@@ -4,7 +4,8 @@
 #include "Renderer2D.h"
 #include"PhysicsScene.h"
 #include"Sphere.h"
-#include"Rocket.h"
+#include"Box.h"
+//#include"Rocket.h"
 #include"Plane.h"
 
 class Physics_EngineApp : public aie::Application {
@@ -21,6 +22,7 @@ public:
 
 	void cradleSetUp();
 	void frictionExampleSetup();
+	void boxTest();
 
 protected:
 
@@ -33,7 +35,9 @@ protected:
 	Sphere*				m_ball4;
 	Sphere*				m_ball5;
 
-	Rocket*				m_rocket;
+	Box*				m_box1;
+
+	//Rocket*				m_rocket;
 	Plane*				m_plane1;
 	Plane*				m_plane2;
 	Plane*				m_plane3;
