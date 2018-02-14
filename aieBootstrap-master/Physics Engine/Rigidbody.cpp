@@ -5,7 +5,7 @@
 
 Rigidbody::Rigidbody(ShapeType shapeID, glm::vec2 position, glm::vec2 velocity, float rotation, float mass, float linDrag, float angDrag) : 
 	PhysicsObject(shapeID), m_position(position), m_velocity(velocity), m_rotation(rotation), m_mass(mass), m_linearDrag(linDrag), m_angularDrag(angDrag){
-	m_angularVelocity = 2;
+	m_angularVelocity = 0;
 	m_elasticity = 1;
 }
 
@@ -51,9 +51,9 @@ void Rigidbody::resolveCollision(Rigidbody* actor2, glm::vec2 contact, glm::vec2
 	float r1 = glm::dot(contact - m_position, -perp);
 	float r2 = glm::dot(contact - actor2->getPosition(), perp);
 	//velocity of contact point on this object
-	float v1 = glm::dot(m_velocity, normal) - r1 * m_rotation;
+	float v1 = glm::dot(m_velocity, normal) - r1 * m_angularVelocity;
 	//velocity of contact point on actor2
-	float v2 = glm::dot(actor2->getVelocity(), normal) + r2 * actor2->m_rotation;
+	float v2 = glm::dot(actor2->getVelocity(), normal) + r2 * actor2->m_angularVelocity;
 
 	//if they're moving closer, calc effective mass at contact point for each object, then apply forces
 	if(v1 > v2){

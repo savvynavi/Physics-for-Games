@@ -9,14 +9,16 @@ public:
 	virtual void fixedUpdate(glm::vec2 gravity, float timestep);
 	virtual void makeGizmo();
 
-	glm::vec2 getExtents() { return m_extents; }
-	glm::vec4 getColour() { return m_colour; }
+	glm::vec2 getExtents()const { return m_extents; }
+	glm::vec4 getColour()const { return m_colour; }
 
-	float getWidth() { return m_width; }
-	float getHeight() { return m_height; }
+	float getWidth()const { return m_width; }
+	float getHeight()const { return m_height; }
 
-	glm::vec2 getLocalX() { return m_localX; }
-	glm::vec2 getLocalY() { return m_localY; }
+	glm::vec2 getLocalX()const { return m_localX; }
+	glm::vec2 getLocalY()const { return m_localY; }
+
+	bool checkBoxCorners(const Box& box, glm::vec2& contact, int& numContacts, float& penetration, glm::vec2& edgeNorm);
 
 protected:
 	glm::vec4 m_colour;

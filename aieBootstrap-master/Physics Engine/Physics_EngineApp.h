@@ -36,6 +36,7 @@ protected:
 	Sphere*				m_ball5;
 
 	Box*				m_box1;
+	Box*				m_box2;
 
 	//Rocket*				m_rocket;
 	Plane*				m_plane1;
