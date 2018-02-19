@@ -31,7 +31,6 @@ void Box::makeGizmo(){
 
 	aie::Gizmos::add2DTri(p1, p2, p4, m_colour);
 	aie::Gizmos::add2DTri(p1, p4, p3, m_colour);
-	aie::Gizmos::add2DCircle(m_position, 1, 12, glm::vec4(1, 1, 1, 1));
 }
 
 bool Box::checkBoxCorners(const Box& box, glm::vec2& contact, int& numContacts, float& penetration, glm::vec2& edgeNorm){
@@ -47,7 +46,7 @@ bool Box::checkBoxCorners(const Box& box, glm::vec2& contact, int& numContacts, 
 			//pos in worldspace(changed getCentre to getPosition, should be same thing)
 			glm::vec2 p = box.getPosition() + x * box.getLocalX() + y * box.getLocalY();
 			//pos in our boxs space
-			glm::vec2 p0(glm::dot(p - box.getPosition(), box.getLocalX()), glm::dot(p - box.getPosition(), box.getLocalY()));
+			glm::vec2 p0(glm::dot(p - this->getPosition(), this->getLocalX()), glm::dot(p - this->getPosition(), this->getLocalY()));
 
 			if(first == true || p0.x < minX){
 				minX = p0.x;
@@ -62,7 +61,7 @@ bool Box::checkBoxCorners(const Box& box, glm::vec2& contact, int& numContacts, 
 				maxY = p0.y;
 			}
 
-			if(p0.x >= -box.getExtents().x && p0.x <= box.getExtents().x && p0.y >= -box.getExtents().y && p0.y <= box.getExtents().y){
+			if(p0.x >= -this->getExtents().x && p0.x <= this->getExtents().x && p0.y >= -this->getExtents().y && p0.y <= this->getExtents().y){
 				numLocatContacts++;
 				localContact += p0;
 			}
@@ -70,7 +69,12 @@ bool Box::checkBoxCorners(const Box& box, glm::vec2& contact, int& numContacts, 
 		}
 	}
 
-	if(maxX < -box.getExtents().x || minX > box.getExtents().x || maxY < -box.getExtents().y || minY > box.getExtents().y){
+	//checks if boxes are already exactly touching, if so returns false
+	if(maxX <= -this->getExtents().x || minX >= this->getExtents().x || maxY <= -this->getExtents().y || minY >= this->getExtents().y){
+		return false;
+	}
+
+	if(maxX < -this->getExtents().x || minX > this->getExtents().x || maxY < -this->getExtents().y || minY > this->getExtents().y){
 		return false;
 	}
 	if(numLocatContacts == 0){
@@ -78,33 +82,33 @@ bool Box::checkBoxCorners(const Box& box, glm::vec2& contact, int& numContacts, 
 	}
 	bool res = false;
 
-	contact += box.getPosition() + (localContact.x * box.getLocalX() + localContact.y * box.getLocalY()) / (float)numLocatContacts;
+	contact += this->getPosition() + (localContact.x * this->getLocalX() + localContact.y * this->getLocalY()) / (float)numLocatContacts;
 	numContacts++;
 
-	float pen0 = box.getExtents().x - minX;
+	float pen0 = this->getExtents().x - minX;
 	if(pen0 > 0 && (pen0 < penetration || penetration == 0)){
-		edgeNorm = box.getLocalX();
+		edgeNorm = this->getLocalX();
 		penetration = pen0;
 		res = true;
 	}
 
-	pen0 = maxX + box.getExtents().x;
+	pen0 = maxX + this->getExtents().x;
 	if(pen0 > 0 && (pen0 < penetration || penetration == 0)){
-		edgeNorm = -box.getLocalX();
+		edgeNorm = -this->getLocalX();
 		penetration = pen0;
 		res = true;
 	}
 
-	pen0 = box.getExtents().y - minY;
+	pen0 = this->getExtents().y - minY;
 	if(pen0 > 0 && (pen0 < penetration || penetration == 0)){
-		edgeNorm = box.getLocalY();
+		edgeNorm = this->getLocalY();
 		penetration = pen0;
 		res = true;
 	}
 
-	pen0 = maxY + box.getExtents().y;
+	pen0 = maxY + this->getExtents().y;
 	if(pen0 > 0 && (pen0 < penetration || penetration == 0)){
-		edgeNorm = -box.getLocalY();
+		edgeNorm = -this->getLocalY();
 		penetration = pen0;
 		res = true;
 	}

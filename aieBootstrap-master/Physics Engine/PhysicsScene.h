@@ -19,7 +19,7 @@ public:
 	glm::vec2 getGravity() const { return m_gravity; }
 
 	void setTimestep(const float timeStep) { m_timeStep = timeStep; }
-	float getTimeStep() const { return m_timeStep; }
+	float getTimeStep() { return m_timeStep; }
 
 	void checkForCollision();
 
@@ -36,6 +36,5 @@ protected:
 	glm::vec2 m_gravity;
 	float m_timeStep;
 	std::list<PhysicsObject*> m_actors;
-	const int SHAPE_COUNT = 3;
 };
 

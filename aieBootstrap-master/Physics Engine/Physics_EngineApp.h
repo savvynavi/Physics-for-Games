@@ -23,6 +23,7 @@ public:
 	void cradleSetUp();
 	void frictionExampleSetup();
 	void boxTest();
+	void contactForceTest();
 
 protected:
 
@@ -37,6 +38,8 @@ protected:
 
 	Box*				m_box1;
 	Box*				m_box2;
+	Box*				m_box3;
+	Box*				m_box4;
 
 	//Rocket*				m_rocket;
 	Plane*				m_plane1;

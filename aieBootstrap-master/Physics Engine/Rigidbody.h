@@ -29,6 +29,8 @@ public:
 	float getMoment()const { return m_moment; }
 
 	float getAngularVelocity()const { return m_angularVelocity; }
+
+	void nudge(glm::vec2 contactF) { m_position += contactF; }
 protected:
 	glm::vec2 m_position;
 	glm::vec2 m_velocity;
@@ -42,6 +44,4 @@ protected:
 	float m_linearVelocity;
 	float m_angularVelocity;
 	float m_moment;
-
-	//bool m_isKinematic;
 };

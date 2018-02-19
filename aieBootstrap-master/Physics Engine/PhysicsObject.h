@@ -8,7 +8,8 @@ class Plane;
 enum ShapeType{
 	PLANE = 0,
 	SPHERE,
-	BOX
+	BOX,
+	SHAPE_COUNT
 };
 
 class PhysicsObject{
@@ -20,11 +21,6 @@ public:
 	virtual void makeGizmo() = 0;
 	virtual void resetPosition(){};
 	virtual ShapeType getShapeID(){ return m_shapeID; }
-
-	//virtual bool collision(PhysicsObject* other) = 0;
-	//virtual bool sphereCollision(Sphere* other) = 0;
-	//virtual bool planeCollision(Plane* other) = 0;
-	//virtual bool collision(Box* other) = 0;
 protected:
 	ShapeType m_shapeID;
 };

@@ -1,3 +1,4 @@
-﻿  Physics_EngineApp.cpp
+﻿  PhysicsScene.cpp
+c:\users\s170841\documents\physics for games\aiebootstrap-master\physics engine\physicsscene.cpp(170): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Physics Engine.vcxproj -> C:\Users\s170841\Documents\Physics for Games\aieBootstrap-master\temp\Physics Engine\Win32\Debug\Physics Engine.exe
   Physics Engine.vcxproj -> C:\Users\s170841\Documents\Physics for Games\aieBootstrap-master\temp\Physics Engine\Win32\Debug\Physics Engine.pdb (Full PDB)

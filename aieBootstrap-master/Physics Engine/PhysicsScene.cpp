@@ -132,6 +132,7 @@ bool PhysicsScene::sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2){
 bool PhysicsScene::sphere2Sphere(PhysicsObject* obj1, PhysicsObject* obj2){
 	Sphere* sphere1 = dynamic_cast<Sphere*>(obj1);
 	Sphere* sphere2 = dynamic_cast<Sphere*>(obj2);
+	float pen = 0;
 
 	//if dist between spheres less than combined radii, collision occurs
 	if(sphere1 != nullptr && sphere2 != nullptr){
@@ -139,6 +140,13 @@ bool PhysicsScene::sphere2Sphere(PhysicsObject* obj1, PhysicsObject* obj2){
 		if(distance <= (sphere1->getRadius() + sphere2->getRadius())){
 			glm::vec2 contact = 0.5f * (sphere1->getPosition() + sphere2->getPosition());
 			sphere1->resolveCollision(sphere2, contact);
+
+			//pen calc
+			float magDisp = glm::length(sphere2->getPosition() - sphere1->getPosition());
+			glm::vec2 contactForce = (0.5f - (magDisp - (sphere1->getRadius() + sphere2->getRadius()) * ((sphere2->getPosition() - sphere1->getPosition()) / magDisp)));
+			glm::vec2 dist = pen * contact;
+			sphere1->nudge(dist * 0.5f);
+			sphere2->nudge(-dist * 0.5f);
 			return true;
 		}
 	}
@@ -152,6 +160,7 @@ bool PhysicsScene::sphere2Box(PhysicsObject* obj1, PhysicsObject* obj2){
 bool PhysicsScene::box2Plane(PhysicsObject* obj1, PhysicsObject* obj2){
 	Box* box = dynamic_cast<Box*>(obj1);
 	Plane* plane = dynamic_cast<Plane*>(obj2);
+	float pen = 0;
 
 	if(box != nullptr && plane != nullptr){
 		int numContacts = 0;
@@ -179,6 +188,13 @@ bool PhysicsScene::box2Plane(PhysicsObject* obj1, PhysicsObject* obj2){
 					numContacts++;
 					contact += p;
 					contactV += velocityIntoPlane;
+
+					//calc penetration of box into plane
+					if(comFromPlane >= 0){
+						if(pen > distFromPlane || pen < distFromPlane){
+							pen = distFromPlane;
+						}
+					}
 				}
 			}
 		}
@@ -191,6 +207,7 @@ bool PhysicsScene::box2Plane(PhysicsObject* obj1, PhysicsObject* obj2){
 
 			float r = glm::dot(localContact, glm::vec2(plane->getNormal().y, -plane->getNormal().x));
 			float mass0 = 1.0f / (1.0f / box->getMass() + (r * r) / box->getMoment());
+			box->nudge(glm::vec2(pen * -plane->getNormal()));
 
 			//apply force
 			box->applyForce(acceleration * mass0, localContact);
@@ -203,6 +220,7 @@ bool PhysicsScene::box2Plane(PhysicsObject* obj1, PhysicsObject* obj2){
 bool PhysicsScene::box2Sphere(PhysicsObject* obj1, PhysicsObject* obj2){
 	Box* box = dynamic_cast<Box*> (obj1);
 	Sphere* sphere = dynamic_cast<Sphere*>(obj2);
+	float pen = 0;
 
 	if(box != nullptr && sphere != nullptr){
 		glm::vec2 circlePos = sphere->getPosition() - box->getPosition();
@@ -220,6 +238,7 @@ bool PhysicsScene::box2Sphere(PhysicsObject* obj1, PhysicsObject* obj2){
 				if(dp.x * dp.x + dp.y * dp.y < sphere->getRadius() * sphere->getRadius()){
 					numContacts++;
 					contact += glm::vec2(x, y);
+					pen = sphere->getRadius() - glm::length(dp);
 				}
 			}
 		}
@@ -231,11 +250,13 @@ bool PhysicsScene::box2Sphere(PhysicsObject* obj1, PhysicsObject* obj2){
 				numContacts++;
 				contact += glm::vec2(halfWidth, localPos.y);
 				direction = new glm::vec2(box->getLocalX());
+				pen = halfWidth + sphere->getRadius() - localPos.x;
 			}
 			if(localPos.x < 0 && localPos.x > -(halfWidth + sphere->getRadius())){
 				numContacts++;
 				contact += glm::vec2(-halfWidth, localPos.y);
 				direction = new glm::vec2(-box->getLocalX());
+				pen = -(halfWidth + sphere->getRadius()) - localPos.x;
 			}
 		}
 		if(localPos.x < halfWidth && localPos.x > -halfWidth){
@@ -243,11 +264,13 @@ bool PhysicsScene::box2Sphere(PhysicsObject* obj1, PhysicsObject* obj2){
 				numContacts++;
 				contact += glm::vec2(localPos.x, halfHeight);
 				direction = new glm::vec2(box->getLocalY());
+				pen = halfHeight + sphere->getRadius() - localPos.y;
 			}
 			if(localPos.y < 0 && localPos.y > -(halfHeight + sphere->getRadius())){
 				numContacts++;
 				contact += glm::vec2(localPos.x, -halfHeight);
 				direction = new glm::vec2(-box->getLocalY());
+				pen = -(halfHeight + sphere->getRadius()) - localPos.y;
 			}
 		}
 
@@ -255,6 +278,16 @@ bool PhysicsScene::box2Sphere(PhysicsObject* obj1, PhysicsObject* obj2){
 		if(numContacts > 0){
 			contact = box->getPosition() + (1.0f / numContacts) * (box->getLocalX() * contact.x + box->getLocalY() * contact.y);
 			box->resolveCollision(sphere, contact, direction);
+			
+			//pen calc
+			glm::vec2 disp = sphere->getPosition() - box->getPosition();
+			float magDisp = sqrtf(disp.x * disp.x + disp.y * disp.y);
+			//if touching And direction has been set
+			if(magDisp > 0 && direction != nullptr){
+				glm::vec2 nudgeVec = pen * *direction;
+				box->nudge(nudgeVec * 0.5f);
+				sphere->nudge(nudgeVec * 0.5f);
+			}
 		}
 		delete direction;
 	}
@@ -266,8 +299,6 @@ bool PhysicsScene::box2Box(PhysicsObject* obj1, PhysicsObject* obj2){
 	Box* box2 = dynamic_cast<Box*>(obj2);
 
 	if(box1 != nullptr && box2 != nullptr){
-		glm::vec2 boxPos = box2->getPosition() - box1->getPosition();
-
 		glm::vec2 norm(0, 0);
 		glm::vec2 contact(0, 0);
 		float pen = 0;
@@ -279,6 +310,9 @@ bool PhysicsScene::box2Box(PhysicsObject* obj1, PhysicsObject* obj2){
 		}
 		if(pen > 0){
 			box1->resolveCollision(box2, contact / (float)numContacts, &norm);
+			glm::vec2 disp = pen * norm;
+			box1->nudge(-disp * 0.5f);
+			box2->nudge(disp * 0.5f);
 		}
 		return true;
 	}

@@ -22,7 +22,8 @@ bool Physics_EngineApp::startup() {
 
 	//cradleSetUp();
 	//frictionExampleSetup();
-	boxTest();
+	//boxTest();
+	contactForceTest();
 	return true;
 }
 
@@ -107,6 +108,8 @@ void Physics_EngineApp::frictionExampleSetup(){
 	m_ball2 = new Sphere(glm::vec2(10, 15), glm::vec2(-5, 10), 4.0f, 4, glm::vec4(1, 0.5f, 0, 1), 0, 0.3f, 0.3f);
 	m_ball3 = new Sphere(glm::vec2(20, 15), glm::vec2(-20, 50), 4.0f, 8, glm::vec4(1, 1, 0, 1), 0, 0.3f, 0.3f);
 
+	m_box1 = new Box(glm::vec2(5, 20), glm::vec2(0, -10), 16.0f, 5, 5, glm::vec4(1, 0, 1, 1), 0, 0);
+
 	m_physicsScene->addActor(m_ball1);
 	m_physicsScene->addActor(m_ball2);
 	m_physicsScene->addActor(m_ball3);
@@ -114,22 +117,56 @@ void Physics_EngineApp::frictionExampleSetup(){
 	m_physicsScene->addActor(m_plane1);
 	m_physicsScene->addActor(m_plane2);
 	m_physicsScene->addActor(m_plane3);
+
+	m_physicsScene->addActor(m_box1);
+
 }
 
 void Physics_EngineApp::boxTest(){
 	m_physicsScene = new PhysicsScene();
-	m_physicsScene->setGravity(glm::vec2(0, 0));
+	m_physicsScene->setGravity(glm::vec2(0, -10));
 	m_physicsScene->setTimestep(0.001f);
 
-	m_box1 = new Box(glm::vec2(0, 0), glm::vec2(0, 10), 16.0f, 15, 10, glm::vec4(1, 0, 1, 1), 0, 0);
-	m_box2 = new Box(glm::vec2(0, -20), glm::vec2(0, -10), 16.0f, 15, 10, glm::vec4(0.75f, 0, 1, 1), 0, 0);
+	m_box1 = new Box(glm::vec2(5, 20), glm::vec2(0, -10), 16.0f, 10, 10, glm::vec4(1, 0, 1, 1), 0, 0);
+	m_box2 = new Box(glm::vec2(0, -20), glm::vec2(0, 10), 16.0f, 10, 10, glm::vec4(0.75f, 0, 1, 1), 0, 0);
+	
+	m_box3 = new Box(glm::vec2(-20, 0), glm::vec2(10, 0), 16.0f, 10, 10, glm::vec4(1, 0, 1, 1), 0, 0);
+	m_box4 = new Box(glm::vec2(20, 0), glm::vec2(-10, 0), 16.0f, 10, 10, glm::vec4(0.75f, 0, 1, 1), 0, 0);
+
 
 	m_ball1 = new Sphere(glm::vec2(30, 15), glm::vec2(-10, 0), 4.0f, 4, glm::vec4(0.75f, 0, 1, 1), 0, 0, 0);
 	m_plane1 = new Plane(glm::vec2(0, 1), -10);
 
 	m_physicsScene->addActor(m_box1);
-	m_physicsScene->addActor(m_box2);
+	//m_physicsScene->addActor(m_box2);
+	m_physicsScene->addActor(m_box3);
+	//m_physicsScene->addActor(m_box4);
 
-	//m_physicsScene->addActor(m_ball1);
-	//m_physicsScene->addActor(m_plane1);
+	m_physicsScene->addActor(m_ball1);
+	m_physicsScene->addActor(m_plane1);
+}
+
+void Physics_EngineApp::contactForceTest(){
+	m_physicsScene = new PhysicsScene();
+	m_physicsScene->setGravity(glm::vec2(0, -10));
+	m_physicsScene->setTimestep(0.01f);
+
+	m_box1 = new Box(glm::vec2(0, 0), glm::vec2(0, 0), 16.0f, 5, 5, glm::vec4(1, 0, 1, 1), 0, 0);
+	m_box2 = new Box(glm::vec2(0, 10), glm::vec2(0, 0), 16.0f, 5, 5, glm::vec4(0.75f, 0, 1, 1), 0, 0);
+	m_box3 = new Box(glm::vec2(0, 40), glm::vec2(0, 0), 16.0f, 5, 5, glm::vec4(1, 0, 1, 1), 0, 0);
+
+	m_ball1 = new Sphere(glm::vec2(0, 0), glm::vec2(0, 0), 4.0f, 4, glm::vec4(0.75f, 0, 1, 1), 0, 0, 0);
+	m_ball2 = new Sphere(glm::vec2(0, 10), glm::vec2(0, 0), 4.0f, 4, glm::vec4(1, 0, 1, 1), 0, 0, 0);
+
+
+	m_plane1 = new Plane(glm::vec2(0, 1), -10);
+
+	//m_physicsScene->addActor(m_box1);
+	//m_physicsScene->addActor(m_box2);
+	//m_physicsScene->addActor(m_box3);
+
+	m_physicsScene->addActor(m_ball1);
+	m_physicsScene->addActor(m_ball2);
+
+	m_physicsScene->addActor(m_plane1);
 }
