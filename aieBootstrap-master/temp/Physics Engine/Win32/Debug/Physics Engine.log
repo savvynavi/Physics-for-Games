@@ -1,4 +1,14 @@
-﻿  PhysicsScene.cpp
-c:\users\s170841\documents\physics for games\aiebootstrap-master\physics engine\physicsscene.cpp(170): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Physics Engine.vcxproj -> C:\Users\s170841\Documents\Physics for Games\aieBootstrap-master\temp\Physics Engine\Win32\Debug\Physics Engine.exe
-  Physics Engine.vcxproj -> C:\Users\s170841\Documents\Physics for Games\aieBootstrap-master\temp\Physics Engine\Win32\Debug\Physics Engine.pdb (Full PDB)
+﻿  Spring.cpp
+c:\users\s170841\documents\physics for games\aiebootstrap-master\physics engine\spring.cpp(5): error C2512: 'PhysicsObject': no appropriate default constructor available
+  c:\users\s170841\documents\physics for games\aiebootstrap-master\physics engine\physicsobject.h(16): note: see declaration of 'PhysicsObject'
+  Rigidbody.cpp
+  Generating Code...
+  Compiling...
+  Sphere.cpp
+  Plane.cpp
+  main.cpp
+  Physics_EngineApp.cpp
+  PhysicsScene.cpp
+c:\users\s170841\documents\physics for games\aiebootstrap-master\physics engine\physicsscene.cpp(185): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Box.cpp
+  Generating Code...

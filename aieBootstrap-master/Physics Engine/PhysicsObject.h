@@ -6,6 +6,7 @@ class Plane;
 //class Box;
 
 enum ShapeType{
+	JOINT = -1,
 	PLANE = 0,
 	SPHERE,
 	BOX,

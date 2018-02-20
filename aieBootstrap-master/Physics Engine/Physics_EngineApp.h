@@ -24,6 +24,7 @@ public:
 	void frictionExampleSetup();
 	void boxTest();
 	void contactForceTest();
+	void springTest();
 
 protected:
 
@@ -40,6 +41,7 @@ protected:
 	Box*				m_box2;
 	Box*				m_box3;
 	Box*				m_box4;
+	Box*				m_box5;
 
 	//Rocket*				m_rocket;
 	Plane*				m_plane1;

@@ -29,7 +29,7 @@ void PhysicsScene::removeActor(PhysicsObject* actor){
 }
 
 void PhysicsScene::update(float dt){
-	
+	//dt *= 0.1f;
 	static float accumulatedTime = 0.0f;
 	accumulatedTime += dt;
 
@@ -109,6 +109,7 @@ bool PhysicsScene::plane2Box(PhysicsObject* obj1, PhysicsObject* obj2){
 bool PhysicsScene::sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2){
 	Sphere* sphere = dynamic_cast<Sphere*>(obj1);
 	Plane* plane = dynamic_cast<Plane*>(obj2);
+	float pen = 0;
 
 	if(sphere != nullptr && plane != nullptr){
 		glm::vec2 collisionNorm = plane->getNormal();
@@ -123,6 +124,14 @@ bool PhysicsScene::sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2){
 		if(intersection > 0){
 			glm::vec2 contact = sphere->getPosition() + (collisionNorm * (-sphere->getRadius()));
 			plane->resolveCollision(sphere, contact);
+
+			//pen calc
+			float distFromPlane = glm::dot(sphere->getPosition() - sphere->getRadius() - (collisionNorm * plane->getDistance()), collisionNorm);
+			if(pen < distFromPlane || pen > distFromPlane){
+				pen = distFromPlane;
+			}
+
+			sphere->nudge(glm::vec2(pen * -collisionNorm));
 			return true;
 		}
 	}
@@ -142,11 +151,18 @@ bool PhysicsScene::sphere2Sphere(PhysicsObject* obj1, PhysicsObject* obj2){
 			sphere1->resolveCollision(sphere2, contact);
 
 			//pen calc
-			float magDisp = glm::length(sphere2->getPosition() - sphere1->getPosition());
-			glm::vec2 contactForce = (0.5f - (magDisp - (sphere1->getRadius() + sphere2->getRadius()) * ((sphere2->getPosition() - sphere1->getPosition()) / magDisp)));
-			glm::vec2 dist = pen * contact;
-			sphere1->nudge(dist * 0.5f);
-			sphere2->nudge(-dist * 0.5f);
+			pen = distance - (sphere1->getRadius() + sphere2->getRadius());
+			glm::vec2 norm = (sphere1->getPosition() - sphere2->getPosition()) / distance;
+			glm::vec2 contactForce = pen * norm;
+
+			if(sphere1->isKinematic() == false && sphere2->isKinematic() == false){
+				sphere1->nudge(-contactForce * 0.5f);
+				sphere2->nudge(contactForce * 0.5f);
+			} else if(sphere1->isKinematic() == false){
+				sphere1->nudge(-contactForce);
+			} else{
+				sphere2->nudge(contactForce);
+			}
 			return true;
 		}
 	}
@@ -204,9 +220,10 @@ bool PhysicsScene::box2Plane(PhysicsObject* obj1, PhysicsObject* obj2){
 			float collisionV = contactV / (float)numContacts;
 			glm::vec2 acceleration = -plane->getNormal() * ((1.0f + box->getElasticity()) * collisionV);
 			glm::vec2 localContact = (contact / (float)numContacts) - box->getPosition();
-
+			
 			float r = glm::dot(localContact, glm::vec2(plane->getNormal().y, -plane->getNormal().x));
 			float mass0 = 1.0f / (1.0f / box->getMass() + (r * r) / box->getMoment());
+			
 			box->nudge(glm::vec2(pen * -plane->getNormal()));
 
 			//apply force
@@ -256,7 +273,7 @@ bool PhysicsScene::box2Sphere(PhysicsObject* obj1, PhysicsObject* obj2){
 				numContacts++;
 				contact += glm::vec2(-halfWidth, localPos.y);
 				direction = new glm::vec2(-box->getLocalX());
-				pen = -(halfWidth + sphere->getRadius()) - localPos.x;
+				pen = (halfWidth + sphere->getRadius()) + localPos.x;
 			}
 		}
 		if(localPos.x < halfWidth && localPos.x > -halfWidth){
@@ -270,7 +287,7 @@ bool PhysicsScene::box2Sphere(PhysicsObject* obj1, PhysicsObject* obj2){
 				numContacts++;
 				contact += glm::vec2(localPos.x, -halfHeight);
 				direction = new glm::vec2(-box->getLocalY());
-				pen = -(halfHeight + sphere->getRadius()) - localPos.y;
+				pen = (halfHeight + sphere->getRadius()) + localPos.y;
 			}
 		}
 
@@ -284,9 +301,17 @@ bool PhysicsScene::box2Sphere(PhysicsObject* obj1, PhysicsObject* obj2){
 			float magDisp = sqrtf(disp.x * disp.x + disp.y * disp.y);
 			//if touching And direction has been set
 			if(magDisp > 0 && direction != nullptr){
+				//kinematic alterations, if one or other isKinematic, apply nudge to only other moving actor
 				glm::vec2 nudgeVec = pen * *direction;
-				box->nudge(nudgeVec * 0.5f);
-				sphere->nudge(nudgeVec * 0.5f);
+
+				if(box->isKinematic() == false && sphere->isKinematic() == false){
+					box->nudge(-nudgeVec * 0.5f);
+					sphere->nudge(nudgeVec * 0.5f);
+				}else if(box->isKinematic() == false){
+					box->nudge(-nudgeVec);
+				}else{
+					sphere->nudge(nudgeVec);
+				}
 			}
 		}
 		delete direction;
@@ -311,8 +336,17 @@ bool PhysicsScene::box2Box(PhysicsObject* obj1, PhysicsObject* obj2){
 		if(pen > 0){
 			box1->resolveCollision(box2, contact / (float)numContacts, &norm);
 			glm::vec2 disp = pen * norm;
-			box1->nudge(-disp * 0.5f);
-			box2->nudge(disp * 0.5f);
+
+			//kinematic code
+			if(box1->isKinematic() == false && box2->isKinematic() == false){
+				box1->nudge(-disp * 0.5f);
+				box2->nudge(disp * 0.5f);
+			} else if(box1->isKinematic() == false){
+				box1->nudge(-disp);
+			} else{
+				box2->nudge(disp);
+			}
+
 		}
 		return true;
 	}

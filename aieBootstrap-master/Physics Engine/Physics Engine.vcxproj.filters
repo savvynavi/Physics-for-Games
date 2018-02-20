@@ -42,6 +42,9 @@
     <ClCompile Include="Box.cpp">
       <Filter>Source Files\Physics Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Spring.cpp">
+      <Filter>Source Files\Physics Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Physics_EngineApp.h">
@@ -63,6 +66,9 @@
       <Filter>Header Files\Physics Objects</Filter>
     </ClInclude>
     <ClInclude Include="Box.h">
+      <Filter>Header Files\Physics Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Spring.h">
       <Filter>Header Files\Physics Objects</Filter>
     </ClInclude>
   </ItemGroup>

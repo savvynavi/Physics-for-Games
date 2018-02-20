@@ -16,7 +16,7 @@ public:
 	float getRotation()const { return m_rotation; }
 	glm::vec2 getVelocity()const { return m_velocity; }
 	void setVelocity(glm::vec2 velocity) { m_velocity = velocity; }
-	float getMass()const { return m_mass; }
+	float getMass()const { return(m_isKinematic) ? INT_MAX : m_mass; }
 	void setMass(float mass) { m_mass = mass; }
 	float getElasticity()const { return m_elasticity; }
 
@@ -24,6 +24,9 @@ public:
 	void setLinearDrag(float linearDrag) { m_linearDrag = linearDrag; }
 	float getAngularDrag()const { return m_angularDrag; }
 	void setAngularDrag(float angularDrag) { m_angularDrag = angularDrag; }
+	
+	void setKinematic(bool state) { m_isKinematic = state; }
+	bool isKinematic() { return m_isKinematic; }
 
 	void setMoment(float moment) { m_moment = moment; }
 	float getMoment()const { return m_moment; }
@@ -38,6 +41,7 @@ protected:
 	float m_rotation;
 	float m_elasticity;
 
+	bool m_isKinematic;
 	float m_linearDrag;
 	float m_angularDrag;
 
