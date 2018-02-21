@@ -194,10 +194,35 @@ void Physics_EngineApp::springTest(){
 	m_physicsScene->setGravity(glm::vec2(0, -10));
 	m_physicsScene->setTimestep(0.01f);
 
-	m_ball1 = new Sphere(glm::vec2(1, 20), glm::vec2(0, 0), 4.0f, 4, glm::vec4(0.75f, 0, 1, 1), 0, 0, 0);
-	m_ball2 = new Sphere(glm::vec2(20, 10), glm::vec2(0, 0), 4.0f, 4, glm::vec4(0, 1, 1, 1), 0, 0, 0);
+	int startX = -50;
+	Sphere* ball1;
+	Sphere* ball2;
 
-	m_ball1->setKinematic(true);
-	m_physicsScene->addActor(m_ball1);
-	m_physicsScene->addActor(m_ball2);
+	ball1 = new Sphere(glm::vec2(startX, 40), glm::vec2(0, 0), 1.0f, 2, glm::vec4(0, 1, 1, 1), 0, 0.3f, 0);
+	ball1->setKinematic(true);
+	m_physicsScene->addActor(ball1);
+	int numBalls = 10;
+
+	for(int i = 0; i < numBalls; i++){
+		ball2 = new Sphere(glm::vec2(startX + (i * 6), 40), glm::vec2(0, 0), 1.0f, 2, glm::vec4(0, 1, 1, 1), 0, 0.3f, 0);
+		m_physicsScene->addActor(ball2);
+		m_physicsScene->addActor(new Spring(ball1, ball2, 5, 10, 0.1f));
+		ball1 = ball2;
+		//if( i == 9){
+		//	ball1->setKinematic(true);
+		//}
+	}
+
+
+	//make spheres
+	//for(int x = 0; x <= width; x++){
+	//	for(int y = 0; y <= height; y++){
+	//		sphere = new Sphere(glm::vec2(x * 5, y * 5), glm::vec2(0, 0), 4.0f, 1, glm::vec4(1, 0, 1, 1), 0, 0, 0);
+	//		m_physicsScene->addActor(sphere);
+	//		m_physicsScene->addActor(new Spring());
+	//	}
+	//}
+
+	//m_plane1 = new Plane(glm::vec2(0, 1), -10);
+	//m_physicsScene->addActor(m_plane1);
 }

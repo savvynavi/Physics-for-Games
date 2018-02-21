@@ -7,6 +7,7 @@
 #include"Box.h"
 //#include"Rocket.h"
 #include"Plane.h"
+#include"Spring.h"
 
 class Physics_EngineApp : public aie::Application {
 public:
@@ -47,4 +48,6 @@ protected:
 	Plane*				m_plane1;
 	Plane*				m_plane2;
 	Plane*				m_plane3;
+
+	Spring*				m_spring1;
 };

@@ -82,6 +82,10 @@ void PhysicsScene::checkForCollision(){
 			PhysicsObject* object2 = *inner;
 			int shapeId1 = object1->getShapeID();
 			int shapeId2 = object2->getShapeID();
+			//ignore joints/springs
+			if(shapeId1 < 0 || shapeId2 < 0){
+				continue;
+			}
 
 			//using fn pointers
 			int functionIdx = (shapeId1 * SHAPE_COUNT) + shapeId2;
