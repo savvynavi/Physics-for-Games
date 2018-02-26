@@ -9,6 +9,8 @@
 #include"Plane.h"
 #include"Spring.h"
 
+#include"Pool.h"
+
 class Physics_EngineApp : public aie::Application {
 public:
 
@@ -26,6 +28,7 @@ public:
 	void boxTest();
 	void contactForceTest();
 	void springTest();
+	void pool();
 
 protected:
 
@@ -50,4 +53,9 @@ protected:
 	Plane*				m_plane3;
 
 	Spring*				m_spring1;
+
+	Pool*				m_pool;
+
+
+	glm::vec2			m_mousePos;
 };

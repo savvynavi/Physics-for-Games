@@ -20,11 +20,14 @@ bool Physics_EngineApp::startup() {
 	m_2dRenderer = new aie::Renderer2D();
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
 
+	m_mousePos = glm::vec2();
+
 	//cradleSetUp();
-	//frictionExampleSetup();
+	frictionExampleSetup();
 	//boxTest();
 	//contactForceTest();
-	springTest();
+	//springTest();
+	//pool();
 	return true;
 }
 
@@ -40,6 +43,8 @@ void Physics_EngineApp::update(float deltaTime) {
 	aie::Input* input = aie::Input::getInstance();
 
 	aie::Gizmos::clear();
+
+	m_mousePos = glm::vec2(input->getMouseX(), input->getMouseY());
 
 	m_physicsScene->update(deltaTime);
 	m_physicsScene->updateGizmos();
@@ -60,10 +65,12 @@ void Physics_EngineApp::draw() {
 	// draw your stuff here!
 	static float aspectRatio = 16 / 9.0f;
 	aie::Gizmos::draw2D(glm::ortho<float>(-100, 100, -100 / aspectRatio, 100 / aspectRatio, -1.0f, 1.0f));
-
+	
+	//mouse pointer
+	aie::Gizmos::add2DCircle(m_mousePos, 4, 12, glm::vec4(1, 1, 1, 1));
 
 	// output some text, uses the last used colour
-	m_2dRenderer->drawText(m_font, "Press ESC to quit", 0, 0);
+	//m_2dRenderer->drawText(m_font, "Press ESC to quit", 0, 0);
 
 	// done drawing sprites
 	m_2dRenderer->end();
@@ -203,26 +210,21 @@ void Physics_EngineApp::springTest(){
 	m_physicsScene->addActor(ball1);
 	int numBalls = 10;
 
-	for(int i = 0; i < numBalls; i++){
-		ball2 = new Sphere(glm::vec2(startX + (i * 6), 40), glm::vec2(0, 0), 1.0f, 2, glm::vec4(0, 1, 1, 1), 0, 0.3f, 0);
+	for(int i = 1; i < numBalls; i++){
+		ball2 = new Sphere(glm::vec2(startX + (i * 6.0f), 40), glm::vec2(0, 0), 1.0f, 2, glm::vec4(0, 1, 1, 1), 0, 0.3f, 0);
 		m_physicsScene->addActor(ball2);
-		m_physicsScene->addActor(new Spring(ball1, ball2, 5, 10, 0.1f));
+		m_physicsScene->addActor(new Spring(ball1, ball2, 0, 10, 0.1f));
 		ball1 = ball2;
-		//if( i == 9){
-		//	ball1->setKinematic(true);
-		//}
+		if(i == 9){
+			ball1->setKinematic(true);
+		}
 	}
+}
 
+void Physics_EngineApp::pool(){
+	m_physicsScene = new PhysicsScene();
+	m_physicsScene->setGravity(glm::vec2(0, 0));
+	m_physicsScene->setTimestep(0.01f);
 
-	//make spheres
-	//for(int x = 0; x <= width; x++){
-	//	for(int y = 0; y <= height; y++){
-	//		sphere = new Sphere(glm::vec2(x * 5, y * 5), glm::vec2(0, 0), 4.0f, 1, glm::vec4(1, 0, 1, 1), 0, 0, 0);
-	//		m_physicsScene->addActor(sphere);
-	//		m_physicsScene->addActor(new Spring());
-	//	}
-	//}
-
-	//m_plane1 = new Plane(glm::vec2(0, 1), -10);
-	//m_physicsScene->addActor(m_plane1);
+	m_pool = new Pool(m_physicsScene);
 }

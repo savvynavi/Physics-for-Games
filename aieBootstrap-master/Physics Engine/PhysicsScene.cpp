@@ -29,7 +29,7 @@ void PhysicsScene::removeActor(PhysicsObject* actor){
 }
 
 void PhysicsScene::update(float dt){
-	//dt *= 0.1f;
+	//dt *= 0.01f;
 	static float accumulatedTime = 0.0f;
 	accumulatedTime += dt;
 
@@ -130,12 +130,12 @@ bool PhysicsScene::sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2){
 			plane->resolveCollision(sphere, contact);
 
 			//pen calc
-			float distFromPlane = glm::dot(sphere->getPosition() - sphere->getRadius() - (collisionNorm * plane->getDistance()), collisionNorm);
-			if(pen < distFromPlane || pen > distFromPlane){
-				pen = distFromPlane;
+			glm::vec2 contF = collisionNorm * (sphereToPlane - sphere->getRadius());
+			if(pen < sphereToPlane || pen > sphereToPlane){
+				pen = sphereToPlane;
 			}
 
-			sphere->nudge(glm::vec2(pen * -collisionNorm));
+			sphere->nudge(glm::vec2(pen * -contF));
 			return true;
 		}
 	}

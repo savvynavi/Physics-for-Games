@@ -32,6 +32,8 @@ public:
 	float getMoment()const { return m_moment; }
 
 	float getAngularVelocity()const { return m_angularVelocity; }
+	
+	void setLinearVelocity(float vel) { m_linearVelocity = vel; }
 
 	void nudge(glm::vec2 contactF) { m_position += contactF; }
 protected:

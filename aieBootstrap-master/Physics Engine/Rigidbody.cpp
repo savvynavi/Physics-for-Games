@@ -6,7 +6,7 @@
 Rigidbody::Rigidbody(ShapeType shapeID, glm::vec2 position, glm::vec2 velocity, float rotation, float mass, float linDrag, float angDrag) : 
 	PhysicsObject(shapeID), m_position(position), m_velocity(velocity), m_rotation(rotation), m_mass(mass), m_linearDrag(linDrag), m_angularDrag(angDrag), m_isKinematic(false){
 	m_angularVelocity = 0;
-	m_elasticity = 0.3f;
+	m_elasticity = 0.9f;
 }
 
 Rigidbody::~Rigidbody(){
@@ -15,6 +15,8 @@ Rigidbody::~Rigidbody(){
 
 void Rigidbody::fixedUpdate(glm::vec2 gravity, float timeStep){
 	if(m_isKinematic == true){
+		m_velocity = glm::vec2(0, 0);
+		m_angularVelocity = 0;
 		return;
 	}
 	
