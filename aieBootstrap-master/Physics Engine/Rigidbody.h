@@ -4,7 +4,7 @@
 
 class Rigidbody : public PhysicsObject{
 public:
-	Rigidbody(ShapeType shapeID, glm::vec2 position, glm::vec2 velocity, float rotation, float mass, float linDrag = 0.3f, float angDrag = 0.3f);
+	Rigidbody(ShapeType shapeID, glm::vec2 position, glm::vec2 velocity, float rotation, float mass, float elasticity = 1,bool kinematic = false , float linDrag = 0.3f, float angDrag = 0.3f);
 	~Rigidbody();
 
 	virtual void fixedUpdate(glm::vec2 gravity, float timeStep);
@@ -19,6 +19,7 @@ public:
 	float getMass()const { return(m_isKinematic) ? INT_MAX : m_mass; }
 	void setMass(float mass) { m_mass = mass; }
 	float getElasticity()const { return m_elasticity; }
+	void setElasticity(float elasticity) { m_elasticity = elasticity; }
 
 	float getLinearDrag()const { return m_linearDrag; }
 	void setLinearDrag(float linearDrag) { m_linearDrag = linearDrag; }

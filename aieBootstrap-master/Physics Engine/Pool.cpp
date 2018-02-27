@@ -6,13 +6,13 @@
 Pool::Pool(PhysicsScene* physScene) : 
 	m_physScene(physScene){
 	//instantiate board
-	m_lSide = new Box(glm::vec2(-BOARD_XPOS, -5), glm::vec2(0, 0), 1, 5, 80, glm::vec4(0.25f, 1, 0, 1), 0, 0);
-	m_rSide = new Box(glm::vec2(BOARD_XPOS, -5), glm::vec2(0, 0), 1, 5, 80, glm::vec4(0.25f, 1, 0, 1), 0, 0);
+	m_lSide = new Box(glm::vec2(-BOARD_XPOS, -5), glm::vec2(0, 0), 0, 1, 5, 80, glm::vec4(0.25f, 1, 0, 1), 0, 0);
+	m_rSide = new Box(glm::vec2(BOARD_XPOS, -5), glm::vec2(0, 0), 0, 1, 5, 80, glm::vec4(0.25f, 1, 0, 1), 0, 0);
 
-	m_lTop = new Box(glm::vec2(-BOARD_XPOS + 45, BOARD_YPOS), glm::vec2(0, 0), 1, 45, 5, glm::vec4(0.25f, 1, 0, 1), 0, 0);
-	m_rTop = new Box(glm::vec2(0, BOARD_YPOS), glm::vec2(0, 0), 1, 100, 5, glm::vec4(0.25f, 1, 0, 1), 0, 0);
-	m_lBottom = new Box(glm::vec2(0, BOARD_YPOS), glm::vec2(0, 0), 1, 100, 5, glm::vec4(0.25f, 1, 0, 1), 0, 0);
-	m_rBottom = new Box(glm::vec2(0, BOARD_YPOS), glm::vec2(0, 0), 1, 100, 5, glm::vec4(0.25f, 1, 0, 1), 0, 0);
+	m_lTop = new Box(glm::vec2(-BOARD_XPOS + 45, BOARD_YPOS), glm::vec2(0, 0), 0, 1, 45, 5, glm::vec4(0.25f, 1, 0, 1), 0, 0);
+	m_rTop = new Box(glm::vec2(0, BOARD_YPOS), glm::vec2(0, 0), 0, 1, 100, 5, glm::vec4(0.25f, 1, 0, 1), 0, 0);
+	m_lBottom = new Box(glm::vec2(0, BOARD_YPOS), glm::vec2(0, 0), 0, 1, 100, 5, glm::vec4(0.25f, 1, 0, 1), 0, 0);
+	m_rBottom = new Box(glm::vec2(0, BOARD_YPOS), glm::vec2(0, 0), 0, 1, 100, 5, glm::vec4(0.25f, 1, 0, 1), 0, 0);
 
 
 	//add to scene

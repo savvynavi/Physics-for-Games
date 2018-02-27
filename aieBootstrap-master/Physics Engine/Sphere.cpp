@@ -2,8 +2,8 @@
 #include"Plane.h"
 #include<Gizmos.h>
 
-Sphere::Sphere(glm::vec2 position, glm::vec2 velocity, float mass, float radius, glm::vec4 colour, float rotation, float linDrag = 0.3f, float angDrag = 0.3f) :
-	Rigidbody(SPHERE, position, velocity, rotation, mass, linDrag, angDrag), m_radius(radius), m_colour(colour){
+Sphere::Sphere(glm::vec2 position, glm::vec2 velocity, float mass, float radius, glm::vec4 colour, float elasticity, bool kinematic, float rotation, float linDrag, float angDrag) :
+	Rigidbody(SPHERE, position, velocity, rotation, mass, elasticity, kinematic, linDrag, angDrag), m_radius(radius), m_colour(colour){
 	this->setMoment(0.5f * m_mass * m_radius * m_radius);
 }
 

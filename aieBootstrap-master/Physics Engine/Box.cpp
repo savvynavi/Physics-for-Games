@@ -3,8 +3,8 @@
 
 
 
-Box::Box(glm::vec2 position, glm::vec2 velocity, float mass, float width, float height, glm::vec4 colour, float linDrag, float angDrag) : 
-	Rigidbody(BOX, position, velocity, 0, mass, linDrag, angDrag), m_width(width), m_height(height), m_colour(colour), m_extents(width / 2, height / 2){
+Box::Box(glm::vec2 position, glm::vec2 velocity, float rotation, float mass, float width, float height, glm::vec4 colour, float elasticity, bool kinematic, float linDrag, float angDrag) :
+	Rigidbody(BOX, position, velocity, rotation, mass, elasticity, kinematic, linDrag, angDrag), m_width(width), m_height(height), m_colour(colour), m_extents(width / 2, height / 2){
 	this->setMoment(1.0f / 12.0f * m_mass * width * height);
 }
 

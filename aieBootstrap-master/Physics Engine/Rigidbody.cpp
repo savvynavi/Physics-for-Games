@@ -3,10 +3,9 @@
 #define MIN_ROTATIONAL_THRESHOLD 0.001f
 
 
-Rigidbody::Rigidbody(ShapeType shapeID, glm::vec2 position, glm::vec2 velocity, float rotation, float mass, float linDrag, float angDrag) : 
-	PhysicsObject(shapeID), m_position(position), m_velocity(velocity), m_rotation(rotation), m_mass(mass), m_linearDrag(linDrag), m_angularDrag(angDrag), m_isKinematic(false){
+Rigidbody::Rigidbody(ShapeType shapeID, glm::vec2 position, glm::vec2 velocity, float rotation, float mass, float elasticity, bool kinematic, float linDrag, float angDrag) :
+	PhysicsObject(shapeID), m_position(position), m_velocity(velocity), m_rotation(rotation), m_mass(mass), m_elasticity(elasticity),m_linearDrag(linDrag), m_angularDrag(angDrag), m_isKinematic(kinematic){
 	m_angularVelocity = 0;
-	m_elasticity = 0.9f;
 }
 
 Rigidbody::~Rigidbody(){
