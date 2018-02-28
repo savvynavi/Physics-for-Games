@@ -70,7 +70,6 @@ static fn collisionFunctionArray[] = {
 void PhysicsScene::checkForCollision(){
 	int actorCount = m_actors.size();
 
-	//need to check for collisions against all objects except this one?????????
 	//can't grab list elements easily, adding iterators to get around this
 	auto oneBeforeEnd = m_actors.end();
 	std::advance(oneBeforeEnd, -1);

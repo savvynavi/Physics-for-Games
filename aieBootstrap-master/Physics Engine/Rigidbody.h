@@ -30,9 +30,10 @@ public:
 	bool isKinematic() { return m_isKinematic; }
 
 	void setMoment(float moment) { m_moment = moment; }
-	float getMoment()const { return m_moment; }
+	float getMoment()const { return (m_isKinematic) ? INT_MAX : m_moment; }
 
 	float getAngularVelocity()const { return m_angularVelocity; }
+	void setAngularVelocity(float angVel) { m_angularVelocity = angVel; }
 	
 	void setLinearVelocity(float vel) { m_linearVelocity = vel; }
 

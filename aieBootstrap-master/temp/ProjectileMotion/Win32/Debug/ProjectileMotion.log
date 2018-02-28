@@ -6,4 +6,5 @@
   PhysicsScene.cpp
 c:\users\s170841\documents\physics for games\aiebootstrap-master\projectilemotion\physicsscene.cpp(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   Generating Code...
+cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
 LINK : fatal error LNK1104: cannot open file 'bootstrap.lib'

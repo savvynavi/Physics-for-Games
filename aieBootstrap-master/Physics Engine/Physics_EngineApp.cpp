@@ -20,6 +20,8 @@ bool Physics_EngineApp::startup() {
 	m_2dRenderer = new aie::Renderer2D();
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
 	m_physicsScene = new PhysicsScene();
+	m_physicsScene->setTimestep(0.01f);
+	m_physicsScene->setGravity(glm::vec2(0, -10));
 
 	m_sm = new StateManager(2);
 	m_pinball = new Pinball(m_physicsScene, m_sm, m_font);

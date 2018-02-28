@@ -19,6 +19,8 @@ public:
 
 	virtual void onUpdate(float timeStep);
 	virtual void onDraw();
+
+	void addForceMouse();
 private:
 	StateManager* m_sm;
 	aie::Font* m_font;
@@ -35,5 +37,6 @@ private:
 	glm::vec2 m_mousePosDragged;
 
 	int m_score;
+	bool mouseDrag;
 };
 

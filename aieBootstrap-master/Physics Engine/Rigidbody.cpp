@@ -14,9 +14,10 @@ Rigidbody::~Rigidbody(){
 
 void Rigidbody::fixedUpdate(glm::vec2 gravity, float timeStep){
 	if(m_isKinematic == true){
-		m_velocity = glm::vec2(0, 0);
-		m_angularVelocity = 0;
-		return;
+		//m_velocity = glm::vec2(0, 0);
+		//m_angularVelocity = 0;
+		gravity = glm::vec2(0, 0);
+		//return;
 	}
 	
 	m_position += m_velocity * timeStep;
@@ -41,9 +42,9 @@ void Rigidbody::debug(){
 
 //newtons 2nd law
 void Rigidbody::applyForce(glm::vec2 force, glm::vec2 position){
-	glm::vec2 acceleration = { force.x / m_mass, force.y / m_mass };
+	glm::vec2 acceleration = { force.x / this->getMass(), force.y / this->getMass() };
 	m_velocity += acceleration;
-	m_angularVelocity += (force.y * position.x - force.x * position.y) / m_moment;
+	m_angularVelocity += (force.y * position.x - force.x * position.y) / this->getMoment();
 }
 
 void Rigidbody::resolveCollision(Rigidbody* actor2, glm::vec2 contact, glm::vec2* collisionNormal){
@@ -62,8 +63,8 @@ void Rigidbody::resolveCollision(Rigidbody* actor2, glm::vec2 contact, glm::vec2
 
 	//if they're moving closer, calc effective mass at contact point for each object, then apply forces
 	if(v1 > v2){
-		float mass1 = 1.0f / (1.0f / m_mass + (r1 * r2) / m_moment);
-		float mass2 = 1.0f / (1.0f / actor2->getMass() + (r1 + r2) / actor2->m_moment);
+		float mass1 = 1.0f / (1.0f / this->getMass() + (r1 * r2) / this->getMoment());
+		float mass2 = 1.0f / (1.0f / actor2->getMass() + (r1 * r2) / actor2->getMoment());
 	
 		float elasticity = (m_elasticity + actor2->getElasticity()) / 2.0f;
 		glm::vec2 force = (1.0f + elasticity) * mass1 * mass2 / (mass1 + mass2)* (v1 - v2) * normal;
