@@ -21,27 +21,40 @@ void MainMenu::onUpdate(float timeStep){
 	if(m_input->wasKeyPressed(aie::INPUT_KEY_SPACE)){
 		if(m_menuSelector == 0){
 			m_sm->popState();
+			onExit();
 			m_sm->pushState(PINBALL);
 			onEnter();
-		}else if(m_menuSelector == 1){
+		} else if(m_menuSelector == 1){
+			m_sm->popState();
+			onExit();
+			m_sm->pushState(PHYS_DEMO);
+			onEnter();
+		}else if(m_menuSelector == 2){
+			m_sm->popState();
+			onExit();
+			m_sm->pushState(CRADLE);
+			onEnter();
+		}else if(m_menuSelector == 3){
 			m_sm->popState();
 			m_app->quit();
 		}
 	}
 
 	//moving the selector up/down
-	if(m_input->wasKeyPressed(aie::INPUT_KEY_DOWN) && m_menuSelector < 1){
-		m_selectorHeight -= 100;
+	if(m_input->wasKeyPressed(aie::INPUT_KEY_DOWN) && m_menuSelector < 3){
+		m_selectorHeight -= 50;
 		m_menuSelector++;
 	}
 	if(m_input->wasKeyPressed(aie::INPUT_KEY_UP) && m_menuSelector > 0){
-		m_selectorHeight += 100;
+		m_selectorHeight += 50;
 		m_menuSelector--;
 	}
 }
 
 void MainMenu::onDraw(){
 	m_renderer->drawText(m_font, "Pinball", OFFSET, 400);
-	m_renderer->drawText(m_font, "Quit to Desktop", OFFSET, 300);
+	m_renderer->drawText(m_font, "Physics Demo", OFFSET, 350);
+	m_renderer->drawText(m_font, "Newtons Cradle", OFFSET, 300);
+	m_renderer->drawText(m_font, "Quit to Desktop", OFFSET, 250);
 	m_renderer->drawText(m_font, ">", OFFSET - 30, m_selectorHeight);
 }

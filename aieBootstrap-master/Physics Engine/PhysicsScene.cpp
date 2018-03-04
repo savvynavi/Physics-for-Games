@@ -28,6 +28,10 @@ void PhysicsScene::removeActor(PhysicsObject* actor){
 	m_actors.remove(actor);
 }
 
+void PhysicsScene::clearAllActors(){
+	m_actors.clear();
+}
+
 void PhysicsScene::update(float dt){
 	//dt *= 0.01f;
 	static float accumulatedTime = 0.0f;

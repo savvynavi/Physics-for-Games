@@ -1,3 +1,10 @@
-﻿  Pinball.cpp
-  Physics Engine.vcxproj -> C:\Users\s170841\Documents\Physics for Games\aieBootstrap-master\temp\Physics Engine\Win32\Debug\Physics Engine.exe
-  Physics Engine.vcxproj -> C:\Users\s170841\Documents\Physics for Games\aieBootstrap-master\temp\Physics Engine\Win32\Debug\Physics Engine.pdb (Full PDB)
+﻿  Physics_EngineApp.cpp
+  Generating Code...
+  Compiling...
+  main.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  MainMenu.cpp
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Physics Engine.vcxproj -> C:\Users\Microwave-chan\Documents\AIE\Physics for Games\aieBootstrap-master\temp\Physics Engine\Win32\Debug\Physics Engine.exe
+  Physics Engine.vcxproj -> C:\Users\Microwave-chan\Documents\AIE\Physics for Games\aieBootstrap-master\temp\Physics Engine\Win32\Debug\Physics Engine.pdb (Full PDB)

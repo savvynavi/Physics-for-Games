@@ -10,7 +10,7 @@ public:
 	virtual void fixedUpdate(glm::vec2 gravity, float timeStep);
 	virtual void debug();
 	void applyForce(glm::vec2 force, glm::vec2 position);
-	void resolveCollision(Rigidbody* sctor2, glm::vec2 contact, glm::vec2* collisionNormal = nullptr);
+	void resolveCollision(Rigidbody* actor2, glm::vec2 contact, glm::vec2* collisionNormal = nullptr);
 
 	glm::vec2 getPosition()const { return m_position; }
 	float getRotation()const { return m_rotation; }

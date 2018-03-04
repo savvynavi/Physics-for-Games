@@ -163,7 +163,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Demo.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="NewtonsCradle.cpp" />
     <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="Physics_EngineApp.cpp" />
     <ClCompile Include="main.cpp" />
@@ -177,7 +179,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Box.h" />
+    <ClInclude Include="Demo.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="NewtonsCradle.h" />
     <ClInclude Include="PhysicsObject.h" />
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="Physics_EngineApp.h" />

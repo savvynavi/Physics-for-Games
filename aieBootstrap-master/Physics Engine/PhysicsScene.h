@@ -11,6 +11,7 @@ public:
 
 	void addActor(PhysicsObject* actor);
 	void removeActor(PhysicsObject* actor);
+	void clearAllActors();
 	void update(float dt);
 	void updateGizmos();
 	void debugScene();

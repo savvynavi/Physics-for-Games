@@ -63,6 +63,12 @@
     <ClCompile Include="MainMenu.cpp">
       <Filter>Source Files\GSM</Filter>
     </ClCompile>
+    <ClCompile Include="Demo.cpp">
+      <Filter>Source Files\GSM</Filter>
+    </ClCompile>
+    <ClCompile Include="NewtonsCradle.cpp">
+      <Filter>Source Files\GSM</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Physics_EngineApp.h">
@@ -99,6 +105,12 @@
       <Filter>Header Files\GSM</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.h">
+      <Filter>Header Files\GSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Demo.h">
+      <Filter>Header Files\GSM</Filter>
+    </ClInclude>
+    <ClInclude Include="NewtonsCradle.h">
       <Filter>Header Files\GSM</Filter>
     </ClInclude>
   </ItemGroup>
