@@ -1,1 +1,12 @@
-﻿  Bootstrap.vcxproj -> C:\Users\Microwave-chan\Documents\AIE\Physics for Games\aieBootstrap-master\temp\Bootstrap\Win32\Debug\Bootstrap.lib
+﻿  Texture.cpp
+  Renderer2D.cpp
+  Input.cpp
+  imgui_glfw3.cpp
+  Gizmos.cpp
+  Font.cpp
+  Application.cpp
+  imgui_draw.cpp
+  imgui.cpp
+  Generating Code...
+  gl_core_4_4.c
+  Bootstrap.vcxproj -> C:\Users\s170841\Documents\Physics for Games\aieBootstrap-master\temp\Bootstrap\Win32\Debug\Bootstrap.lib

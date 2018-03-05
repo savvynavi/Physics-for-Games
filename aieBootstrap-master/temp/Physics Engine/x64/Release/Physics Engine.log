@@ -1,0 +1,20 @@
+﻿  Box.cpp
+  Demo.cpp
+  MainMenu.cpp
+  NewtonsCradle.cpp
+  PhysicsScene.cpp
+PhysicsScene.cpp(75): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+PhysicsScene.cpp(192): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Physics_EngineApp.cpp
+  main.cpp
+  Pinball.cpp
+  Plane.cpp
+  Rigidbody.cpp
+  Sphere.cpp
+  Spring.cpp
+  State.cpp
+  StateManager.cpp
+StateManager.cpp(67): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+StateManager.cpp(71): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+LINK : fatal error C1047: The object or library file 'C:\Users\s170841\Documents\Physics for Games\aieBootstrap-master\temp\Physics Engine\x64\Release\Box.obj' was created with an older compiler than other objects; rebuild old objects and libraries
+LINK : fatal error LNK1257: code generation failed

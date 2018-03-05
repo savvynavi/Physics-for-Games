@@ -42,6 +42,9 @@ void Physics_EngineApp::shutdown() {
 
 	delete m_font;
 	delete m_2dRenderer;
+
+	delete m_physicsScene;
+	delete m_sm;
 }
 
 void Physics_EngineApp::update(float deltaTime) {

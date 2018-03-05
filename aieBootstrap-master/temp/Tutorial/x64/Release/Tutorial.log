@@ -1,0 +1,4 @@
+﻿  TutorialApp.cpp
+  main.cpp
+LINK : fatal error C1047: The object or library file 'C:\Users\s170841\Documents\Physics for Games\aieBootstrap-master\temp\Tutorial\x64\Release\TutorialApp.obj' was created with an older compiler than other objects; rebuild old objects and libraries
+LINK : fatal error LNK1257: code generation failed

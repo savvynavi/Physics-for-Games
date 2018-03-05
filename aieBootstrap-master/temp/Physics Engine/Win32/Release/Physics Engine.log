@@ -1,0 +1,19 @@
+﻿  Box.cpp
+  Demo.cpp
+  MainMenu.cpp
+  NewtonsCradle.cpp
+  PhysicsScene.cpp
+PhysicsScene.cpp(192): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Physics_EngineApp.cpp
+  main.cpp
+  Pinball.cpp
+  Plane.cpp
+  Rigidbody.cpp
+  Sphere.cpp
+  Spring.cpp
+  State.cpp
+  StateManager.cpp
+  Generating code
+  All 1555 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Physics Engine.vcxproj -> C:\Users\s170841\Documents\Physics for Games\aieBootstrap-master\temp\Physics Engine\Win32\Release\Physics Engine.exe
