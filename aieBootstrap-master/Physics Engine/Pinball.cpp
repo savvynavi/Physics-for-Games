@@ -17,29 +17,29 @@ Pinball::~Pinball(){
 //draws the pinball board out
 void Pinball::board(){
 	//play bounds
-	m_physicsScene->addActor(new Plane(glm::vec2(1, 0), 50));
-	m_physicsScene->addActor(new Plane(glm::vec2(1, 0), -90));
-	m_physicsScene->addActor(new Box(gizmoCoords(glm::vec2(850, 250)), glm::vec2(0, 0), 0, 1, 3, 80, glm::vec4(1, 1, 1, 1), 0.8f, true));
-	m_physicsScene->addActor(new Box(gizmoCoords(glm::vec2(910, 50)), glm::vec2(0, 0), 0, 5, 15, 20, glm::vec4(1, 1, 1, 1), 0.8f, true));
+	m_physicsScene->addActor(new Plane(glm::vec2(1, 0), 40));
+	m_physicsScene->addActor(new Box(gizmoCoords(glm::vec2(0, 360)), glm::vec2(0, 0), 0, 1, 20, 1280, glm::vec4(0.88, 0.35, 0.59, 1), 0.8f, true));
+	m_physicsScene->addActor(new Box(gizmoCoords(glm::vec2(780, 250)), glm::vec2(0, 0), 0, 1, 3, 80, glm::vec4(0.88, 0.35, 0.59, 1), 0.8f, true));
+	m_physicsScene->addActor(new Box(gizmoCoords(glm::vec2(820, 50)), glm::vec2(0, 0), 0, 5, 17, 20, glm::vec4(0.88, 0.35, 0.59, 1), 0.8f, true));
 
 	//corner + roof
-	m_physicsScene->addActor(new Box(gizmoCoords(glm::vec2(900, 650)), glm::vec2(0, 0), 1, 1, 3, 30, glm::vec4(1, 1, 1, 1), 0.8f, true));
-	m_physicsScene->addActor(new Box(gizmoCoords(glm::vec2(450, 700)), glm::vec2(0, 0), 0, 1, 120, 3, glm::vec4(1, 1, 1, 1), 0.8f, true));
+	m_physicsScene->addActor(new Box(gizmoCoords(glm::vec2(860, 670)), glm::vec2(0, 0), 1, 1, 3, 15, glm::vec4(0.88, 0.35, 0.59, 1), 0.8f, true));
+	m_physicsScene->addActor(new Box(gizmoCoords(glm::vec2(450, 700)), glm::vec2(0, 0), 0, 1, 130, 3, glm::vec4(0.88, 0.35, 0.59, 1), 0.8f, true));
 
 	//bumpers
-	m_physicsScene->addActor(new Sphere(gizmoCoords(glm::vec2(350, 300)), glm::vec2(0, 0), 4.0f, 4, glm::vec4(0.75f, 0, 1, 1), 3, true));
-	m_physicsScene->addActor(new Sphere(gizmoCoords(glm::vec2(550, 300)), glm::vec2(0, 0), 4.0f, 4, glm::vec4(0.75f, 0, 1, 1), 3, true));
-	m_physicsScene->addActor(new Sphere(gizmoCoords(glm::vec2(450, 500)), glm::vec2(0, 0), 4.0f, 4, glm::vec4(0.75f, 0, 1, 1), 3, true));
-	m_physicsScene->addActor(new Box(gizmoCoords(glm::vec2(120, 670)), glm::vec2(0, 0), 0.75f, 1, 30, 3, glm::vec4(0.75f, 0, 1, 1), 3, true));
+	m_physicsScene->addActor(new Sphere(gizmoCoords(glm::vec2(310, 300)), glm::vec2(0, 0), 4.0f, 4, glm::vec4(0.55, 0, 0.55, 1), 3, true));
+	m_physicsScene->addActor(new Sphere(gizmoCoords(glm::vec2(510, 300)), glm::vec2(0, 0), 4.0f, 4, glm::vec4(0.55, 0, 0.55, 1), 3, true));
+	m_physicsScene->addActor(new Sphere(gizmoCoords(glm::vec2(410, 500)), glm::vec2(0, 0), 4.0f, 4, glm::vec4(0.55, 0, 0.55, 1), 3, true));
+	m_physicsScene->addActor(new Box(gizmoCoords(glm::vec2(120, 670)), glm::vec2(0, 0), 0.75f, 1, 30, 3, glm::vec4(0.55, 0, 0.55, 1), 3, true));
 
 	//paddles
-	m_leftPaddle = new Box(gizmoCoords(glm::vec2(300, 50)), glm::vec2(0, 0), 1, 1, 3, 30, glm::vec4(1, 1, 1, 1), 0.5f, true);
-	m_rightPaddle = new Box(gizmoCoords(glm::vec2(600, 50)), glm::vec2(0, 0), -1, 1, 3, 30, glm::vec4(1, 1, 1, 1), 0.5f, true);
+	m_leftPaddle = new Box(gizmoCoords(glm::vec2(260, 50)), glm::vec2(0, 0), 1, 1, 3, 30, glm::vec4(0.23, 0, 0.53, 1), 0.5f, true);
+	m_rightPaddle = new Box(gizmoCoords(glm::vec2(560, 50)), glm::vec2(0, 0), -1, 1, 3, 30, glm::vec4(0.23, 0, 0.53, 1), 0.5f, true);
 	m_physicsScene->addActor(m_leftPaddle);
 	m_physicsScene->addActor(m_rightPaddle);
 
 	//ball
-	m_ball = new Sphere(gizmoCoords(glm::vec2(910, 60)), glm::vec2(0, 0), 10.0f, 4, glm::vec4(0, 1, 1, 1), 0.9f, false, 0, 0.2f, 0.2f);
+	m_ball = new Sphere(gizmoCoords(glm::vec2(850, 60)), glm::vec2(0, 0), 10.0f, 4, glm::vec4(0.95, 0.77, 0.05, 1), 0.9f, false, 0, 0.2f, 0.2f);
 	m_physicsScene->addActor(m_ball);
 }
 
@@ -81,17 +81,16 @@ void Pinball::onDraw(){
 	//drawing lives in
 	m_renderer->drawText(m_font, "Lives", 1000, 200);
 	for(int i = 0; i < m_lives; i++){
-		aie::Gizmos::add2DCircle(glm::vec2(60 + (i * 6.0f), -30), 2, 12, glm::vec4(0, 1, 1, 1));
+		aie::Gizmos::add2DCircle(glm::vec2(60 + (i * 6.0f), -30), 2, 12, glm::vec4(0.95, 0.77, 0.05, 1));
 	}
-
 	//if the ball falls off the bottom of the screen, you lose a life and the ball resets itself
-	if(m_ball->getPosition().y < -60){
+	if(m_ball->getPosition().y < -80){
 		m_lives--;
 		//if you run out of lives, displays text and stops spawning ball
 		if(m_lives >= 0){
 			resetBall();
 		} else{
-			m_renderer->drawText(m_font, "Out of lives - hit R to restart", 1280 / 2 - 400, 400);
+			m_renderer->drawText(m_font, "Out of lives - hit R to restart", 1280 / 2 - 400, 600);
 			if(m_input->wasKeyPressed(aie::INPUT_KEY_R)){
 				m_lives = LIVES;
 				resetBall();
@@ -103,7 +102,7 @@ void Pinball::onDraw(){
 }
 
 void Pinball::onEnter(){
-	m_physicsScene->setGravity(glm::vec2(0, -10));
+	m_physicsScene->setGravity(glm::vec2(0, -20));
 	m_lives = LIVES;
 	m_score = 0;
 	board();
@@ -147,7 +146,7 @@ void Pinball::paddleMovement(){
 void Pinball::resetBall(){
 	m_physicsScene->removeActor(m_ball);
 	delete m_ball;
-	m_ball = new Sphere(gizmoCoords(glm::vec2(910, 60)), glm::vec2(0, 0), 10.0f, 4, glm::vec4(0, 1, 1, 1), 0.9f, false, 0, 0.2f, 0.2f);
+	m_ball = new Sphere(gizmoCoords(glm::vec2(850, 60)), glm::vec2(0, 0), 10.0f, 4, glm::vec4(0.95, 0.77, 0.05, 1), 0.9f, false, 0, 0.2f, 0.2f);
 	m_physicsScene->addActor(m_ball);
 }
 
@@ -156,7 +155,7 @@ void Pinball::addForceMouse(){
 	m_input->getMouseXY(&m_mouseX, &m_mouseY);
 	if(m_input->isMouseButtonDown(aie::INPUT_MOUSE_BUTTON_LEFT)){
 		m_mousePosDragged = gizmoCoords(glm::vec2(m_mouseX, m_mouseY));
-		aie::Gizmos::add2DLine(m_mousePosCurrent, m_mousePosDragged, glm::vec4(0, 1, 1, 1));
+		aie::Gizmos::add2DLine(m_mousePosCurrent, m_mousePosDragged, glm::vec4(0.95, 0.77, 0.05, 1));
 	} else{
 		m_mousePosCurrent = gizmoCoords(glm::vec2(m_mouseX, m_mouseY));
 	}

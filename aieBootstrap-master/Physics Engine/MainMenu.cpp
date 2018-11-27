@@ -7,7 +7,7 @@
 MainMenu::MainMenu(aie::Renderer2D* renderer, StateManager* sm, aie::Font* font, Physics_EngineApp* app) : m_renderer(renderer), m_sm(sm), m_font(font){
 	m_input = aie::Input::getInstance();
 	m_menuSelector = 0;
-	m_selectorHeight = 400;
+	m_selectorHeight = 510;
 	this->m_app = app;
 }
 
@@ -36,12 +36,16 @@ void MainMenu::onUpdate(float timeStep){
 			onEnter();
 		}else if(m_menuSelector == 3){
 			m_sm->popState();
+			m_sm->pushState(INSTRUCTIONS);
+			onEnter();
+		} else if(m_menuSelector == 4){
+			m_sm->popState();
 			m_app->quit();
 		}
 	}
 
 	//moving the selector up/down
-	if(m_input->wasKeyPressed(aie::INPUT_KEY_DOWN) && m_menuSelector < 3){
+	if(m_input->wasKeyPressed(aie::INPUT_KEY_DOWN) && m_menuSelector < 4){
 		m_selectorHeight -= 50;
 		m_menuSelector++;
 	}
@@ -52,9 +56,10 @@ void MainMenu::onUpdate(float timeStep){
 }
 
 void MainMenu::onDraw(){
-	m_renderer->drawText(m_font, "Pinball", OFFSET, 400);
-	m_renderer->drawText(m_font, "Physics Demo", OFFSET, 350);
-	m_renderer->drawText(m_font, "Newtons Cradle", OFFSET, 300);
-	m_renderer->drawText(m_font, "Quit to Desktop", OFFSET, 250);
+	m_renderer->drawText(m_font, "Pinball", OFFSET, 510);
+	m_renderer->drawText(m_font, "Physics Demo", OFFSET, 460);
+	m_renderer->drawText(m_font, "Newtons Cradle", OFFSET, 410);
+	m_renderer->drawText(m_font, "Instructions", OFFSET, 360);
+	m_renderer->drawText(m_font, "Quit to Desktop", OFFSET, 310);
 	m_renderer->drawText(m_font, ">", OFFSET - 30, m_selectorHeight);
 }

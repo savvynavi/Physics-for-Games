@@ -69,6 +69,9 @@
     <ClCompile Include="NewtonsCradle.cpp">
       <Filter>Source Files\GSM</Filter>
     </ClCompile>
+    <ClCompile Include="Instructions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Physics_EngineApp.h">
@@ -112,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="NewtonsCradle.h">
       <Filter>Header Files\GSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Instructions.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

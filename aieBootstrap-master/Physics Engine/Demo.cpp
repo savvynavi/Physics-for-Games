@@ -60,7 +60,7 @@ void Demo::startup(){
 	Sphere* spheres[width][height];
 	for(int i = 0; i < width; i++){
 		for(int j = 0; j < height; j++){
-			spheres[i][j] = new Sphere(glm::vec2((i * 3.0f), (j * 3.0f)), glm::vec2(0, 0), 5.0f, 1, glm::vec4(0, 1, 1, 1));
+			spheres[i][j] = new Sphere(glm::vec2((i * 3.0f), (j * 3.0f)), glm::vec2(0, 0), 5.0f, 1, glm::vec4(0.55, 0, 0.55, 1));
 			m_physicsScene->addActor(spheres[i][j]);
 		}
 	}
@@ -96,12 +96,12 @@ void Demo::startup(){
 	int startX = -30;
 	Sphere* ball1;
 	Sphere* ball2;
-	ball1 = new Sphere(glm::vec2(startX, 40), glm::vec2(0, 0), 1.0f, 1, glm::vec4(0, 1, 1, 1), 0.9f, true);
+	ball1 = new Sphere(glm::vec2(startX, 40), glm::vec2(0, 0), 1.0f, 1, glm::vec4(0.88, 0.35, 0.59, 1), 0.9f, true);
 	m_physicsScene->addActor(ball1);
 	int numBalls = 20;
 
 	for(int i = 1; i < numBalls; i++){
-		ball2 = new Sphere(glm::vec2(startX + (i * 2.0f), 40), glm::vec2(0, 0), 1.0f, 1, glm::vec4(0, 1, 1, 1), 0.9f, false);
+		ball2 = new Sphere(glm::vec2(startX + (i * 2.0f), 40), glm::vec2(0, 0), 1.0f, 1, glm::vec4(0.88, 0.35, 0.59, 1), 0.9f, false);
 		m_physicsScene->addActor(ball2);
 		m_physicsScene->addActor(new Spring(ball1, ball2, 0, 100, 0.1f));
 		ball1 = ball2;
@@ -115,7 +115,7 @@ void Demo::startup(){
 void Demo::drawAtMouse(){
 	m_input->getMouseXY(&m_mouseX, &m_mouseY);
 	if(m_input->isMouseButtonDown(aie::INPUT_MOUSE_BUTTON_RIGHT)){
-		m_physicsScene->addActor(new Sphere(gizmoCoords(glm::vec2(m_mouseX, m_mouseY)), glm::vec2(0, 0), 4, 2, glm::vec4(1, 1, 0, 1), 0.9f, false, 0, 0.3f, 0.3f));
+		m_physicsScene->addActor(new Sphere(gizmoCoords(glm::vec2(m_mouseX, m_mouseY)), glm::vec2(0, 0), 4, 2, glm::vec4(0.95, 0.77, 0.05, 1), 0.9f, false, 0, 0.3f, 0.3f));
 	}
 }
 

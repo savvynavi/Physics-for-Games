@@ -1,11 +1,1 @@
-﻿  imgui.cpp
-  imgui_draw.cpp
-  Application.cpp
-  Font.cpp
-  Gizmos.cpp
-  imgui_glfw3.cpp
-  Input.cpp
-  Renderer2D.cpp
-  Texture.cpp
-  gl_core_4_4.c
-  Bootstrap.vcxproj -> C:\Users\s170841\Documents\Physics for Games\aieBootstrap-master\temp\Bootstrap\Win32\Release\Bootstrap.lib
+﻿  Bootstrap.vcxproj -> C:\Users\s170841\Documents\2d engine\aieBootstrap-master\temp\Bootstrap\Win32\Release\Bootstrap.lib

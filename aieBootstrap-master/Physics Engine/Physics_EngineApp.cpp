@@ -23,16 +23,18 @@ bool Physics_EngineApp::startup() {
 	m_physicsScene->setTimestep(0.001f);
 	m_physicsScene->setGravity(glm::vec2(0, -10));
 
-	m_sm = new StateManager(4);
+	m_sm = new StateManager(5);
 	m_pinball = new Pinball(m_physicsScene, m_sm, m_2dRenderer, m_font);
 	m_mainMenu = new MainMenu(m_2dRenderer, m_sm, m_font, this);
 	m_demo = new Demo(m_sm, m_physicsScene);
 	m_cradle = new NewtonsCradle(m_sm, m_physicsScene);
+	m_instructions = new Instructions(m_physicsScene, m_sm, m_2dRenderer, m_font);
 
 	m_sm->registerState(PINBALL, m_pinball);
 	m_sm->registerState(MAIN_MENU, m_mainMenu);
 	m_sm->registerState(PHYS_DEMO, m_demo);
 	m_sm->registerState(CRADLE, m_cradle);
+	m_sm->registerState(INSTRUCTIONS, m_instructions);
 	m_sm->pushState(MAIN_MENU);
 
 	return true;

@@ -15,6 +15,7 @@
 #include"MainMenu.h"
 #include"Demo.h"
 #include"NewtonsCradle.h"
+#include"Instructions.h"
 
 #include"Pool.h"
 
@@ -43,6 +44,7 @@ protected:
 	MainMenu*			m_mainMenu;
 	Demo*				m_demo;
 	NewtonsCradle*		m_cradle;
+	Instructions*		m_instructions;
 
 	glm::vec2			m_mousePos;
 	int					m_mouseX, m_mouseY;

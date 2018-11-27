@@ -4,7 +4,8 @@ enum States{
 	MAIN_MENU,
 	PINBALL,
 	PHYS_DEMO,
-	CRADLE
+	CRADLE,
+	INSTRUCTIONS
 };
 
 class State{

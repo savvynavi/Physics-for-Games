@@ -22,7 +22,7 @@
     <ProjectGuid>{91BE7D70-6E5D-447D-B92E-D9DD2BE1CB25}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Physics_Engine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -164,6 +164,7 @@
   <ItemGroup>
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Demo.cpp" />
+    <ClCompile Include="Instructions.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="NewtonsCradle.cpp" />
     <ClCompile Include="PhysicsScene.cpp" />
@@ -180,6 +181,7 @@
   <ItemGroup>
     <ClInclude Include="Box.h" />
     <ClInclude Include="Demo.h" />
+    <ClInclude Include="Instructions.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="NewtonsCradle.h" />
     <ClInclude Include="PhysicsObject.h" />

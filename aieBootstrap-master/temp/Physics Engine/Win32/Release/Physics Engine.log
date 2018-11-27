@@ -1,19 +1,17 @@
-﻿  Box.cpp
-  Demo.cpp
+﻿  Demo.cpp
+  Instructions.cpp
   MainMenu.cpp
   NewtonsCradle.cpp
   PhysicsScene.cpp
-PhysicsScene.cpp(192): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\s170841\documents\2d engine\aiebootstrap-master\physics engine\physicsscene.cpp(192): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Physics_EngineApp.cpp
   main.cpp
   Pinball.cpp
-  Plane.cpp
-  Rigidbody.cpp
-  Sphere.cpp
-  Spring.cpp
   State.cpp
   StateManager.cpp
   Generating code
-  All 1555 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  33 of 1652 functions ( 2.0%) were compiled, the rest were copied from previous compilation.
+    9 functions were new in current compilation
+    33 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  Physics Engine.vcxproj -> C:\Users\s170841\Documents\Physics for Games\aieBootstrap-master\temp\Physics Engine\Win32\Release\Physics Engine.exe
+  Physics Engine.vcxproj -> C:\Users\s170841\Documents\2d engine\aieBootstrap-master\temp\Physics Engine\Win32\Release\Physics Engine.exe
